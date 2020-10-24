@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="ApolloDPP">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="ApolloDPP">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="说明：本文内容源于《Python Data Science Handbook[1]》（Python数据科学手册[2]）第四章Matplotlib介绍部分。本文作图展示环境   本文写作参考：  概述Matplotlib是一个python的2D绘图库，可以生成出版质量级别的图形。可以绘制直方图，功率谱，条形图，错误图，散点图等。 1.简单的折线图最简单、最基本的接口首先在jupyter noteb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sharing Matplotlib超全使用攻略">
+<meta property="og:url" content="http://example.com/2020/10/24/3/index.html">
+<meta property="og:site_name" content="ApolloDPP">
+<meta property="og:description" content="说明：本文内容源于《Python Data Science Handbook[1]》（Python数据科学手册[2]）第四章Matplotlib介绍部分。本文作图展示环境   本文写作参考：  概述Matplotlib是一个python的2D绘图库，可以生成出版质量级别的图形。可以绘制直方图，功率谱，条形图，错误图，散点图等。 1.简单的折线图最简单、最基本的接口首先在jupyter noteb">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwlbd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEw3VA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEw3VA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwG5t.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwYPP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEw8UI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwt8f.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwUxS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwN28.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwwrQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwdKg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwDVs.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEw0bj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEwran.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/23/BEws5q.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/24/BV9Nfe.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/24/BV90OI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/24/BV9w6A.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/24/BV9dld.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/24/BV9aSH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/10/24/BV9Dmt.png">
+<meta property="article:published_time" content="2020-10-24T03:03:02.704Z">
+<meta property="article:modified_time" content="2020-10-24T02:08:41.475Z">
+<meta property="article:author" content="ApolloDPP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/10/23/BEwlbd.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>Sharing Matplotlib超全使用攻略 · ApolloDPP&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ApolloDPP&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Sharing Matplotlib超全使用攻略</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>ApolloDPP's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Sharing Matplotlib超全使用攻略
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/10/24</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <hr>
+<p>说明：本文内容源于《Python Data Science Handbook[1]》（Python数据科学手册[2]）第四章Matplotlib介绍部分。本文作图展示环境</p>
+<hr>
+<blockquote>
+<p>本文写作参考：</p>
+</blockquote>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Matplotlib是一个python的2D绘图库，可以生成出版质量级别的图形。可以绘制直方图，功率谱，条形图，错误图，散点图等。</p>
+<h3 id="1-简单的折线图"><a href="#1-简单的折线图" class="headerlink" title="1.简单的折线图"></a>1.简单的折线图</h3><h5 id="最简单、最基本的接口"><a href="#最简单、最基本的接口" class="headerlink" title="最简单、最基本的接口"></a>最简单、最基本的接口</h5><p>首先在jupyter notebook中导入matplotlib函数包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline     <span class="comment">#本行代码只在jupyter notebook这种在线编辑器时使用，pycharm这种不需要</span></span><br></pre></td></tr></table></figure>
+
+<p>对于所有的Matplotlib图标，我们都需要创建图形和维度：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fig=plt.figure()  <span class="comment">#表示新开一个显示窗口，多个窗口时：figure(1),figure(2)……</span></span><br><span class="line">ax=plt.axes()</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwlbd"><img src="https://s1.ax1x.com/2020/10/23/BEwlbd.png" alt="BEwlbd.png"></a></p>
+<p>在Matplotlib中，图形（plt.figure的一个实例）可以认为是一个包含<strong>所有维度、图像、标签、文本对象的容器。</strong></p>
+<p>一旦我们创建了维度，我们可以用ax.plot方法将数据绘制在图上，下图是简单的余弦函数图形。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np <span class="comment">#导入numpy库</span></span><br><span class="line">fig=plt.figure()  </span><br><span class="line">ax=plt.axes()</span><br><span class="line"></span><br><span class="line">x=np.linspace(<span class="number">0</span>,<span class="number">10</span>,<span class="number">1000</span>)  <span class="comment">#构建等差数列，0-10之间取1000个点</span></span><br><span class="line">ax.plot(x,np.cos(x));</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEw3VA"><img src="https://s1.ax1x.com/2020/10/23/BEw3VA.png" alt="BEw3VA.png"></a></p>
+<p>同样，我们也可以使用<strong>pylab接口</strong>(MATLAB风格接口)帮我们在后台创建这两个对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.cos(x));</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEw3VA"><img src="https://s1.ax1x.com/2020/10/23/BEw3VA.png" alt="BEw3VA.png"></a></p>
+<p>如果我们要在一幅图里面绘制多根线条，只需要<strong>多次调用plot函数</strong>即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.cos(x))</span><br><span class="line">plt.plot(x,np.sin(x));</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwG5t"><img src="https://s1.ax1x.com/2020/10/23/BEwG5t.png" alt="BEwG5t.png"></a></p>
+<h5 id="调整折线图：线条颜色和风格"><a href="#调整折线图：线条颜色和风格" class="headerlink" title="调整折线图：线条颜色和风格"></a>调整折线图：线条颜色和风格</h5><p><strong>color</strong>:通过plt.plot()函数额外的参数color来指定线条颜色，此参数可以得到任何你想要的颜色:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.sin(x<span class="number">-0</span>),color=<span class="string">&quot;blue&quot;</span>)          <span class="comment">#通过颜色名称指定</span></span><br><span class="line">plt.plot(x,np.sin(x<span class="number">-1</span>),color=<span class="string">&quot;g&quot;</span>)             <span class="comment">#通过颜色简写名称指定（rgbcmyk）</span></span><br><span class="line">plt.plot(x,np.sin(x<span class="number">-2</span>),color=<span class="string">&quot;0.75&quot;</span>)          <span class="comment">#介于0-1之间的灰阶值</span></span><br><span class="line">plt.plot(x,np.sin(x<span class="number">-3</span>),color=<span class="string">&quot;#FFDD44&quot;</span>)        <span class="comment">#16进制的RRGGBB的值</span></span><br><span class="line">plt.plot(x,np.sin(x<span class="number">-4</span>),color=(<span class="number">1.0</span>,<span class="number">0.2</span>,<span class="number">0.3</span>))   <span class="comment">#RGB元组的颜色值，每个值介于0-1</span></span><br><span class="line">plt.plot(x,np.sin(x<span class="number">-5</span>),color=<span class="string">&quot;chartreuse&quot;</span>);   <span class="comment">#能支持所以HTML颜色名称值</span></span><br></pre></td></tr></table></figure>
+
+<p><em>如果没有指定颜色，Matplotlib会在一组默认颜色值中循环使用来绘制每一条线条</em></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwYPP"><img src="https://s1.ax1x.com/2020/10/23/BEwYPP.png" alt="BEwYPP.png"></a></p>
+<p><strong>style</strong>:通过参数linestyle来指定线条的风格：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,x+<span class="number">0</span>,linestyle=<span class="string">&quot;solid&quot;</span>)</span><br><span class="line">plt.plot(x,x+<span class="number">1</span>,linestyle=<span class="string">&quot;dashed&quot;</span>)</span><br><span class="line">plt.plot(x,x+<span class="number">2</span>,linestyle=<span class="string">&quot;dashdot&quot;</span>)</span><br><span class="line">plt.plot(x,x+<span class="number">3</span>,linestyle=<span class="string">&quot;dotted&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#还可以使用以下形象的符号代替线条风格</span></span><br><span class="line">plt.plot(x,x+<span class="number">4</span>,linestyle=<span class="string">&quot;-&quot;</span>)  <span class="comment">#实线</span></span><br><span class="line">plt.plot(x,x+<span class="number">5</span>,linestyle=<span class="string">&quot;--&quot;</span>) <span class="comment">#虚线</span></span><br><span class="line">plt.plot(x,x+<span class="number">6</span>,linestyle=<span class="string">&quot;-.&quot;</span>) <span class="comment">#长短点虚线</span></span><br><span class="line">plt.plot(x,x+<span class="number">7</span>,linestyle=<span class="string">&quot;:&quot;</span>); <span class="comment">#点线</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEw8UI"><img src="https://s1.ax1x.com/2020/10/23/BEw8UI.png" alt="BEw8UI.png"></a></p>
+<p>**color + stytle:**将颜色和风格的参数设置放在一个plt.plot()函数中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,x+<span class="number">4</span>,<span class="string">&quot;-g&quot;</span>)  <span class="comment">#绿色实线</span></span><br><span class="line">plt.plot(x,x+<span class="number">5</span>,<span class="string">&quot;--c&quot;</span>) <span class="comment">#天青色虚线</span></span><br><span class="line">plt.plot(x,x+<span class="number">6</span>,<span class="string">&quot;-.k&quot;</span>) <span class="comment">#黑色长短点虚线</span></span><br><span class="line">plt.plot(x,x+<span class="number">7</span>,<span class="string">&quot;:r&quot;</span>); <span class="comment">#红色点线</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwt8f"><img src="https://s1.ax1x.com/2020/10/23/BEwt8f.png" alt="BEwt8f.png"></a></p>
+<h5 id="调整折线图：坐标轴范围"><a href="#调整折线图：坐标轴范围" class="headerlink" title="调整折线图：坐标轴范围"></a>调整折线图：坐标轴范围</h5><p>Matplotlib会自动选择非常合适的坐标轴范围来绘制你的图像，但是有些情况下需要自己自定义来进行坐标轴调整。使用plt.xlim()和plt.ylim()函数来调整坐标轴范围：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.sin(x))</span><br><span class="line">plt.xlim(<span class="number">-1</span>,<span class="number">12</span>)</span><br><span class="line">plt.ylim(<span class="number">-2</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwUxS"><img src="https://s1.ax1x.com/2020/10/23/BEwUxS.png" alt="BEwUxS.png"></a></p>
+<p>有时我们需要将坐标轴翻转，将<strong>参数顺序颠倒</strong>即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.sin(x))</span><br><span class="line">plt.xlim(<span class="number">12</span>,<span class="number">-1</span>)</span><br><span class="line">plt.ylim(<span class="number">2</span>,<span class="number">-2</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwN28"><img src="https://s1.ax1x.com/2020/10/23/BEwN28.png" alt="BEwN28.png"></a></p>
+<p>相关函数还有plt.axis()（<em>注意与plt.axes()函数区分</em>），该函数可以直接通过传递一个列表的方式同时设置x和y轴的范围：传递[xmin,xmax,ymin,ymax]即可（<em>注意坐标轴不可翻转</em>）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.cos(x))</span><br><span class="line">plt.axis([<span class="number">-1</span>,<span class="number">12</span>,<span class="number">-2</span>,<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwwrQ"><img src="https://s1.ax1x.com/2020/10/23/BEwwrQ.png" alt="BEwwrQ.png"></a></p>
+<p>plt.axis()还可以将坐标轴压缩到刚好绘制函数图像的大小：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.cos(x))</span><br><span class="line">plt.axis(<span class="string">&quot;tight&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwdKg"><img src="https://s1.ax1x.com/2020/10/23/BEwdKg.png" alt="BEwdKg.png"></a></p>
+<p>plt.axis()还可以将l两坐标轴设置为等长度：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.cos(x))</span><br><span class="line">plt.axis(<span class="string">&quot;equal&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwDVs"><img src="https://s1.ax1x.com/2020/10/23/BEwDVs.png" alt="BEwDVs.png"></a></p>
+<h5 id="折线图标签"><a href="#折线图标签" class="headerlink" title="折线图标签"></a>折线图标签</h5><p>在折线图上绘制标签：标题、坐标轴标签和简单的图例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.sin(x))</span><br><span class="line">plt.title(<span class="string">&quot;A sin curve&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;x&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;sin(x)&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEw0bj"><img src="https://s1.ax1x.com/2020/10/23/BEw0bj.png" alt="BEw0bj.png"></a></p>
+<p>对于一幅图中绘制多条线条时，对每一根线条添加图例使得图表更加清晰。通过plt.legend()函数可以实现此需求：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,np.sin(x),<span class="string">&quot;-g&quot;</span>,label=<span class="string">&quot;sin(x)&quot;</span>)</span><br><span class="line">plt.plot(x,np.cos(x),<span class="string">&quot;:b&quot;</span>,label=<span class="string">&quot;cos(x)&quot;</span>)</span><br><span class="line">plt.axis(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line">plt.legend();</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEwran"><img src="https://s1.ax1x.com/2020/10/23/BEwran.png" alt="BEwran.png"></a></p>
+<h5 id="额外内容：Matplotlib-的坑"><a href="#额外内容：Matplotlib-的坑" class="headerlink" title="额外内容：Matplotlib 的坑"></a>额外内容：Matplotlib 的坑</h5><p>虽然大多数的plt函数都可以直接替换为ax的方法进行调用（如plt.plot()→ax.plot()），但是并非所有命令都如此，特别是设置<strong>极值、标签和标题</strong>的函数都有一定的改变。下面列出了MATLAB风格函数与面向对象的方法的区别：</p>
+<ul>
+<li>plt.label()→ax.set_xlabel()</li>
+<li>plt.label()→ax.set_xlabel()</li>
+<li>plt.xlim()→ax.set_xlim()</li>
+<li>plt.xlim()→ax.set_xlim()</li>
+<li>plt.title()→ax.set_title()</li>
+</ul>
+<p>在面向对象的接口中，与其逐个调用上面的方法来设置属性，更常见的是使用ax.set()方法一次性设置所有属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ax=plt.axes()</span><br><span class="line">ax.plot(x,np.sin(x))</span><br><span class="line">ax.<span class="built_in">set</span>(xlim=(<span class="number">0</span>,<span class="number">10</span>),ylim=(<span class="number">-2</span>,<span class="number">2</span>),</span><br><span class="line">       xlabel=<span class="string">&quot;x&quot;</span>,ylabel=<span class="string">&quot;sin(x)&quot;</span>,</span><br><span class="line">       title=<span class="string">&quot;An sin curve&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEws5q"><img src="https://s1.ax1x.com/2020/10/23/BEws5q.png" alt="BEws5q.png"></a></p>
+<hr>
+<h3 id="2-简单的散点图"><a href="#2-简单的散点图" class="headerlink" title="2.简单的散点图"></a>2.简单的散点图</h3><p>散点图都是独立分布的点状、圆圈或其他形状，是折线图的近亲</p>
+<h5 id="使用plt-plot绘制散点图"><a href="#使用plt-plot绘制散点图" class="headerlink" title="使用plt.plot绘制散点图"></a>使用plt.plot绘制散点图</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=np.linspace(<span class="number">0</span>,<span class="number">10</span>,<span class="number">30</span>)  </span><br><span class="line">y=np.sin(x)</span><br><span class="line">plt.plot(x,y,<span class="string">&quot;o&quot;</span>,color=<span class="string">&quot;black&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BV9Nfe"><img src="https://s1.ax1x.com/2020/10/24/BV9Nfe.png" alt="BV9Nfe.png"></a></p>
+<p>传输给函数的第三个参数是使用一个字符代表的图表绘制点的类型，就像前面用“-”或“–”等来控制折线图那样，点的类型也可以用短字符来表示，示例如下：（所有的可用符号可以查询plt.plot文档或者Matplotlib在线文档）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rng=np.random.RandomState(<span class="number">0</span>)  <span class="comment">#生成伪随机数据</span></span><br><span class="line"><span class="keyword">for</span> maker <span class="keyword">in</span> [<span class="string">&quot;o&quot;</span>,<span class="string">&quot;.&quot;</span>,<span class="string">&quot;,&quot;</span>,<span class="string">&quot;x&quot;</span>,<span class="string">&quot;+&quot;</span>,<span class="string">&quot;v&quot;</span>,<span class="string">&quot;^&quot;</span>,<span class="string">&quot;,&quot;</span>,<span class="string">&quot;.&quot;</span>,<span class="string">&quot;s&quot;</span>,<span class="string">&quot;d&quot;</span>]:</span><br><span class="line">    plt.plot(rng.rand(<span class="number">5</span>),rng.rand(<span class="number">5</span>),maker,</span><br><span class="line">            label=<span class="string">&quot;maker=&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(maker))</span><br><span class="line">plt.legend(numpoints=<span class="number">1</span>)</span><br><span class="line">plt.xlim(<span class="number">0</span>,<span class="number">1.8</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BV90OI"><img src="https://s1.ax1x.com/2020/10/24/BV90OI.png" alt="BV90OI.png"></a></p>
+<p>而且这些符号代码可以与线条、颜色代码一起使用，在折线图的基础上绘制出散点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,y,<span class="string">&quot;-ok&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BV9w6A"><img src="https://s1.ax1x.com/2020/10/24/BV9w6A.png" alt="BV9w6A.png"></a></p>
+<p>plt.plot()函数还有广泛的关键字参数来设置线条和点的属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,y,<span class="string">&quot;-o&quot;</span>,color=<span class="string">&quot;0.75&quot;</span>,</span><br><span class="line">        markersize=<span class="number">10</span>,linewidth=<span class="number">5</span>,  <span class="comment">#marker是散点形状参数设置</span></span><br><span class="line">        markerfacecolor=<span class="string">&quot;r&quot;</span>,</span><br><span class="line">        markeredgecolor=<span class="string">&quot;green&quot;</span>,</span><br><span class="line">        markeredgewidth=<span class="number">2</span>)</span><br><span class="line">plt.ylim(<span class="number">-1.2</span>,<span class="number">1.2</span>);</span><br></pre></td></tr></table></figure>
+
+<p><em>plt.plot()函数的这种灵活性提供了很多的可视化选择，查阅plt.plot帮助文档获取完整选项说明</em></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BV9dld"><img src="https://s1.ax1x.com/2020/10/24/BV9dld.png" alt="BV9dld.png"></a></p>
+<h5 id="使用plt-scatter绘制散点图"><a href="#使用plt-scatter绘制散点图" class="headerlink" title="使用plt.scatter绘制散点图"></a>使用plt.scatter绘制散点图</h5><p>对于绘制散点图而言，更加强大的函数是plt.scatter()，它的使用方法和plt.plot函数相似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(x,y,marker=<span class="string">&quot;o&quot;</span>);  <span class="comment">#区别在于关键词marker</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BV9aSH"><img src="https://s1.ax1x.com/2020/10/24/BV9aSH.png" alt="BV9aSH.png"></a>   </p>
+<p>plt.scatter与plt.plot之间的主要区别在于，<strong>plt.scatter可以针对每个点设置不同的属性</strong>（大小，填充颜色，边缘颜色等），还可以通过数据集合对这些属性进行设置。</p>
+<p>让我们通过一个随机数集绘制不同颜色和大小的散点图进行说明，为了更好的显示重叠效果，还使用了alpha关键字对点的透明度进行了修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rng=np.random.RandomState(<span class="number">0</span>)</span><br><span class="line">x=rng.randn(<span class="number">100</span>)</span><br><span class="line">y=rng.randn(<span class="number">100</span>)</span><br><span class="line">colors=rng.rand(<span class="number">100</span>)</span><br><span class="line">sizes=<span class="number">1000</span>*rng.rand(<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">plt.scatter(x,y,c=colors,s=sizes,alpha=<span class="number">0.3</span>,cmap=<span class="string">&quot;viridis&quot;</span>)</span><br><span class="line">plt.colorbar();</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BV9Dmt"><img src="https://s1.ax1x.com/2020/10/24/BV9Dmt.png" alt="BV9Dmt.png"></a></p>
+<p>注意右边有一个颜色对比条（通过colormap()函数输出)，图表中的<strong>点的大小的单位是像素</strong>，使用这种方法，散点的颜色和大小都能表示数据的信息，在希望展示多个维度的数据集合情况下很直观。</p>
+<p>举个栗子！</p>
+<p>当我们使用Scikit-learn中的鸢尾花数据集，里面的每个样本都是三种鸢尾花中其中的一种，并带有仔细测量的花瓣和花萼的尺寸数据：</p>
+
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/10/24/2/" title= "DL-Tools  Darknet 框架介绍">
+                    <div class="prevTitle">DL-Tools  Darknet 框架介绍</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:2661983783@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ApolloDPP" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%AE%80%E5%8D%95%E7%9A%84%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">1.简单的折线图</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E3%80%81%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.0.1.</span> <span class="toc-text">最简单、最基本的接口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E6%8A%98%E7%BA%BF%E5%9B%BE%EF%BC%9A%E7%BA%BF%E6%9D%A1%E9%A2%9C%E8%89%B2%E5%92%8C%E9%A3%8E%E6%A0%BC"><span class="toc-number">2.0.2.</span> <span class="toc-text">调整折线图：线条颜色和风格</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E6%8A%98%E7%BA%BF%E5%9B%BE%EF%BC%9A%E5%9D%90%E6%A0%87%E8%BD%B4%E8%8C%83%E5%9B%B4"><span class="toc-number">2.0.3.</span> <span class="toc-text">调整折线图：坐标轴范围</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%A0%87%E7%AD%BE"><span class="toc-number">2.0.4.</span> <span class="toc-text">折线图标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E5%86%85%E5%AE%B9%EF%BC%9AMatplotlib-%E7%9A%84%E5%9D%91"><span class="toc-number">2.0.5.</span> <span class="toc-text">额外内容：Matplotlib 的坑</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">2.简单的散点图</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8plt-plot%E7%BB%98%E5%88%B6%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">3.0.1.</span> <span class="toc-text">使用plt.plot绘制散点图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8plt-scatter%E7%BB%98%E5%88%B6%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">3.0.2.</span> <span class="toc-text">使用plt.scatter绘制散点图</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 4
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/2/" >DL-Tools  Darknet 框架介绍</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/1/" >Hi  salt-fish ApolloDPP!</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/hello-world/" >Hello World</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/10/24/3/" >Sharing Matplotlib超全使用攻略</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "ApolloDPP"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
