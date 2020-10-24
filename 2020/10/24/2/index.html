@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2020/10/21/BP79z9.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/10/24/BZN538.png">
 <meta property="article:published_time" content="2020-10-24T03:02:53.090Z">
-<meta property="article:modified_time" content="2020-10-24T12:28:30.221Z">
+<meta property="article:modified_time" content="2020-10-24T12:57:52.652Z">
 <meta property="article:author" content="ApolloDPP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2020/10/21/BP79z9.png">
@@ -281,7 +281,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">885</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">883</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -420,10 +420,10 @@ height:50vh;
 <p>在介绍原作者Joseph Redmon大神之前，先夸两位更加让人熟知的国内大神，他们的成就和经历比较相似。</p>
 <p>第一位，贾扬清（清本硕，UCLA CS-phd），曾于新加坡国立大学、微软亚洲研究院、NEC美国实验室、Google Brain工作，<strong>现任Facebook研究科学</strong>家，负责前沿AI平台的开发以及前沿的深度学习研究。前几年火遍深度学习圈的学习框架<a target="_blank" rel="noopener" href="http://caffe.berkeleyvision.org/"><strong>Caffe</strong></a>是其在博士期间的一部分作品！（注意只是一部分哈哈哈哈艹）</p>
 <p>第二位，李沐（上交ACM班，CMU CS-phd）,曾实习于微软亚研院、香港科技大学助理研究员、百度高级研究员和首席架构师，<strong>现任亚马逊首席科学家</strong>，因为李沐在博士期间创作了现亚马逊的深度学习框架<a target="_blank" rel="noopener" href="https://bk.tw.lvfukeji.com/wiki/MXNet"><strong>MXnet</strong></a>的原型。</p>
-<p>对于<a target="_blank" rel="noopener" href="https://pjreddie.com/static/Redmon%20Resume.pdf">Joseph Redmon</a>（详细简历）（University of Washington，CS），他的作品比Darknet更出名的是他提出的目标检测算法：**<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25236464">YOLO系列</a>**，为了体现出大神的独一无二，他决定为Yolo打造属于自己的学习框架（这个是我杜撰的hh，应该不会错），整个框架几乎完全基于C编写，非常轻量化，当然也很小众化（原因是像我这样的调包侠不会用啊……）。</p>
+<p>对于<a target="_blank" rel="noopener" href="https://pjreddie.com/static/Redmon%20Resume.pdf">Joseph Redmon</a>（详细简历）（University of Washington，CS），他的作品比Darknet更出名的是他提出的目标检测算法：<strong>YOLO</strong> 为了体现出大神的独一无二，他决定为Yolo打造属于自己的学习框架（这个是我杜撰的hh，应该不会错），整个框架几乎完全基于C编写，非常轻量化，当然也很小众化（原因是像我这样的调包侠不会用啊……）。</p>
 <p>基于Darknet的优点+YOLO系列的加持，Joseph Redmon大神专门做了一个开源网站，下面是他的 paper，不过他已经一年多没有更新自己的Darknet了。现在继续维护优化Darknet的是一位俄罗斯的大神AlexayAB(不知道是不是他的名字，详细见文头链接)</p>
 <p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BP79z9"><img src="https://s1.ax1x.com/2020/10/21/BP79z9.png" alt="BP79z9.png"></a></p>
-<p>​                                                               Joseph Redmon‘s publications</p>
+<p>​                                                                         Joseph Redmon‘s publications</p>
 <hr>
 <h3 id="Dark-net优势"><a href="#Dark-net优势" class="headerlink" title="Dark net优势"></a>Dark net优势</h3><ul>
 <li><p><a target="_blank" rel="noopener" href="https://pjreddie.com/darknet/install/"><strong>易于安装</strong></a>：在makefile里面选择自己需要的附加项（cuda，cudnn，opencv等）直接make即可；</p>
@@ -437,47 +437,44 @@ height:50vh;
 <li><p><strong>独立性好</strong>：整个Darknet是个独立的C语言包，客观来说可以完全不用依赖外部的各种包就可以实现深度学习的任务，但也提供了opencv和cuda的接口，opencv可以实现更加多样的图片接口，cuda为了适应GPU训练，opencv作者也为Darknet编写了可以对其进行替代的函数；</p>
 </li>
 <li><p><strong>源码结构清晰</strong>：下面是<a target="_blank" rel="noopener" href="https://github.com/pjreddie/darknet">github上源码</a>布局:</p>
-</li>
-</ul>
 <table>
 <thead>
 <tr>
-<th>文件夹名称</th>
+<th align="center">文件夹名称</th>
 <th>包含内容</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>cfg</td>
+<td align="center">cfg</td>
 <td>配置整个模型的构架，也即backbone的定义（已经包含有常见的检测、分割的backbone）</td>
 </tr>
 <tr>
-<td>data</td>
+<td align="center">data</td>
 <td>存有一些数据的label，还有可直接训练的coco数据集，但是对于自定义的数据，于此无关</td>
 </tr>
 <tr>
-<td>examples</td>
+<td align="center">examples</td>
 <td>高级函数（如检测函数classifier等），用户最常用的函数文件夹</td>
 </tr>
 <tr>
-<td>include</td>
+<td align="center">include</td>
 <td>C语言头文件</td>
 </tr>
 <tr>
-<td>python</td>
+<td align="center">python</td>
 <td>用python调用模型，主要在darknet.py中（调用时还需用到动态库libdarknet.so）</td>
 </tr>
 <tr>
-<td>scripts</td>
+<td align="center">scripts</td>
 <td>常用的脚本（如coco数据集下载，voc数据转化为训练所需要的数据格式）</td>
 </tr>
 <tr>
-<td>src</td>
+<td align="center">src</td>
 <td>最顶层框架定义文件，也是darknet的源码</td>
 </tr>
 </tbody></table>
-<ul>
-<li><p><strong>易于移植</strong>：（1）得益于C语言，故基于Darknet的项目都会很容易部署到本地机器上，使用CPU或者GPU</p>
-<p>​                   （2）可以利用darknet.py很容易将训练好的模型用python调用</p>
+</li>
+<li><p><strong>易于移植**</strong>：（1）得益于C语言，故基于Darknet的项目都会很容易部署到本地机器上，使用CPU或者GPU；（2）可以利用darknet.py很容易将训练好的模型用python调用**</p>
 </li>
 </ul>
 <hr>
@@ -655,9 +652,16 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 3
+        Total : 4
         </div>
         <!-- search  -->
         
@@ -693,6 +697,20 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/10/24/3/" >Sharing Matplotlib超全使用攻略</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/2.md_0/" >DL-Tools  Darknet 框架介绍 与 安装</a>
         </li>
     
     </div>
