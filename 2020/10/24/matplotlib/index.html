@@ -1054,11 +1054,16 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/10/25/Darknet2_Resnet/" title= "">
+                    <div class="nextTitle">[Untitled Post]</div>
+                </a>
+            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/10/24/Darknet1/" title= "DL-Tools  Darknet 框架介绍 与 安装">
+                <a href= "/2020/10/24/Darknet1_install/" title= "DL-Tools  Darknet 框架介绍 与 安装">
                     <div class="prevTitle">DL-Tools  Darknet 框架介绍 与 安装</div>
                 </a>
             
@@ -1066,6 +1071,21 @@ height:50vh;
     </ul>
     <!-- 评论插件 -->
     <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= https://livere.com/>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
 
 <!-- City版安装代码已完成 -->
     
@@ -1213,11 +1233,26 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 3
+        Total : 4
         </div>
         <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
         
     </div>
     
@@ -1228,11 +1263,6 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/Darknet1/" >DL-Tools  Darknet 框架介绍 与 安装</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1251,6 +1281,25 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/10/24/matplotlib/" >Sharing Matplotlib超全使用攻略</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/2020/10/25/Darknet2_Resnet/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/Darknet1_install/" >DL-Tools  Darknet 框架介绍 与 安装</a>
         </li>
     
     </div>
@@ -1314,6 +1363,29 @@ jsonContent:
     </script>
     <script src="/scripts/main.js"></script>
     <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
     
     <!-- busuanzi  -->
     
