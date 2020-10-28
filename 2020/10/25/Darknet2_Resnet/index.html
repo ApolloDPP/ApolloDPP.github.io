@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2020/10/28/B1lO3t.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/10/28/B1lXgP.png">
 <meta property="article:published_time" content="2020-10-25T08:19:36.158Z">
-<meta property="article:modified_time" content="2020-10-28T02:48:51.752Z">
+<meta property="article:modified_time" content="2020-10-28T05:13:57.440Z">
 <meta property="article:author" content="ApolloDPP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2020/10/28/B1ljjf.png">
@@ -282,7 +282,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">717</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">849</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -445,14 +445,17 @@ height:50vh;
 </ul>
 </li>
 <li><h5 id="训练网络"><a href="#训练网络" class="headerlink" title="训练网络"></a>训练网络</h5><p>前面的文件准备齐全之后，开始网络的训练（此处用CPU，GPU配置看安装教程），输入以下指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;darknet classifier train cfg&#x2F;cifar.data cfg&#x2F;cifar.cfg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$.&#x2F;darknet classifier train cfg&#x2F;cifar.data cfg&#x2F;cifar.cfg</span><br><span class="line"></span><br><span class="line">##.&#x2F;darknet classifier train cfg&#x2F;cifar.data cfg&#x2F;cifar.cfg | tee cifar.log  输出网络至log文件</span><br><span class="line"></span><br><span class="line">##$.&#x2F;darknet classifier train cfg&#x2F;cifar.data cfg&#x2F;cifar.cfg backup&#x2F;cifar.backup</span><br><span class="line">##此语句是在停止后可以在原来model的基础上继续训练网络</span><br></pre></td></tr></table></figure>
 
 <p>训练过程在终端会显示网络结构①，训练过程②：</p>
 <p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B1lXgP"><img src="https://s1.ax1x.com/2020/10/28/B1lXgP.png" alt="B1lXgP.png"></a></p>
 </li>
-<li><h5 id="测试test"><a href="#测试test" class="headerlink" title="测试test"></a>测试test</h5></li>
-</ol>
+<li><h5 id="测试test"><a href="#测试test" class="headerlink" title="测试test"></a>测试test</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;darknet classifier valid cfg&#x2F;cifar.data cfg&#x2F;cifar.cfg backup&#x2F;cifar.backup </span><br><span class="line">#测试整个测试集</span><br><span class="line">#.&#x2F;darknet classifier predict cfg&#x2F;cifar.data cfg&#x2F;cifar.cfg backup&#x2F;cifar.weights data&#x2F;train&#x2F;0007_aabbc1.jpg  测试单张图片</span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
+<hr>
+<h3 id="实战：基于Resnet34实现超声图像标准切面的分类"><a href="#实战：基于Resnet34实现超声图像标准切面的分类" class="headerlink" title="实战：基于Resnet34实现超声图像标准切面的分类"></a>实战：基于Resnet34实现超声图像标准切面的分类</h3>
     </article>
     <!-- license  -->
     
@@ -601,7 +604,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DL-classifier-%E5%9F%BA%E4%BA%8EDark-net%E4%B8%ADResnet34%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">DL classifier 基于Dark net中Resnet34的图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-Darknet-Train-a-Classifier-on-CIFAR-10"><span class="toc-number">1.0.1.</span> <span class="toc-text">Example:Darknet Train a Classifier on CIFAR-10</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Darknet"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">安装Darknet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86CIFAR-10"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">下载数据集CIFAR-10</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%9F%E6%88%90train%E5%92%8Ctest%E5%9B%BE%E7%89%87%E7%9A%84%E7%B4%A2%E5%BC%95list%E6%96%87%E4%BB%B6"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">生成train和test图片的索引list文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-cifar-data%E5%92%8Ccifar-cfg"><span class="toc-number">1.0.1.0.4.</span> <span class="toc-text">制作配置文件:cifar.data和cifar.cfg</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E7%BD%91%E7%BB%9C"><span class="toc-number">1.0.1.0.5.</span> <span class="toc-text">训练网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95test"><span class="toc-number">1.0.1.0.6.</span> <span class="toc-text">测试test</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DL-classifier-%E5%9F%BA%E4%BA%8EDark-net%E4%B8%ADResnet34%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">DL classifier 基于Dark net中Resnet34的图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-Darknet-Train-a-Classifier-on-CIFAR-10"><span class="toc-number">1.0.1.</span> <span class="toc-text">Example:Darknet Train a Classifier on CIFAR-10</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Darknet"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">安装Darknet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86CIFAR-10"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">下载数据集CIFAR-10</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%9F%E6%88%90train%E5%92%8Ctest%E5%9B%BE%E7%89%87%E7%9A%84%E7%B4%A2%E5%BC%95list%E6%96%87%E4%BB%B6"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">生成train和test图片的索引list文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-cifar-data%E5%92%8Ccifar-cfg"><span class="toc-number">1.0.1.0.4.</span> <span class="toc-text">制作配置文件:cifar.data和cifar.cfg</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E7%BD%91%E7%BB%9C"><span class="toc-number">1.0.1.0.5.</span> <span class="toc-text">训练网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95test"><span class="toc-number">1.0.1.0.6.</span> <span class="toc-text">测试test</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%EF%BC%9A%E5%9F%BA%E4%BA%8EResnet34%E5%AE%9E%E7%8E%B0%E8%B6%85%E5%A3%B0%E5%9B%BE%E5%83%8F%E6%A0%87%E5%87%86%E5%88%87%E9%9D%A2%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.0.2.</span> <span class="toc-text">实战：基于Resnet34实现超声图像标准切面的分类</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
