@@ -20,19 +20,32 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="article">
-<meta property="og:title" content="Statistical ML-1 @基本概念">
+    <meta name="description" content="机器学习中的正则化什么是正则化、ML为什么要加入正则化答案是防止过拟合！ 在当前的机器学习中，其目标无非就是使得“机器”学习到的东西与真实值的误差最小，也即loss函数的最小化问题，而正则化项就是跟在误差函数（残差、方差等）项后面的小跟班，但它的作用巨大，通俗来讲，正则化项就是对误差函数的约束。$$Loss&#x3D;min[C\sum_{i&#x3D;1}^m \ell(f(x_i),y_i) +\Omega(f)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Statistical ML-1 @Regularization">
 <meta property="og:url" content="http://example.com/2020/10/26/Statistical%20ML_1/index.html">
 <meta property="og:site_name" content="ApolloDPP">
+<meta property="og:description" content="机器学习中的正则化什么是正则化、ML为什么要加入正则化答案是防止过拟合！ 在当前的机器学习中，其目标无非就是使得“机器”学习到的东西与真实值的误差最小，也即loss函数的最小化问题，而正则化项就是跟在误差函数（残差、方差等）项后面的小跟班，但它的作用巨大，通俗来讲，正则化项就是对误差函数的约束。$$Loss&#x3D;min[C\sum_{i&#x3D;1}^m \ell(f(x_i),y_i) +\Omega(f)">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/07/B5RRgI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/07/B5RWvt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/07/B55DtU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/BoSjTU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/BoSxkF.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/BoSXwT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bopvut.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bopvut.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bo9hGQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bo9fPg.png">
 <meta property="article:published_time" content="2020-10-26T08:17:36.084Z">
-<meta property="article:modified_time" content="2020-10-27T15:59:29.588Z">
+<meta property="article:modified_time" content="2020-11-08T03:06:37.606Z">
 <meta property="article:author" content="ApolloDPP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/11/07/B5RRgI.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Statistical ML-1 @基本概念 · ApolloDPP&#39;s Studio</title>
+    <title>Statistical ML-1 @Regularization · ApolloDPP&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -227,7 +240,7 @@
                 <a href="/" >ApolloDPP&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Statistical ML-1 @基本概念</a>
+                <a href="#" class="post-name">Statistical ML-1 @Regularization</a>
             </div>
     </div>
     
@@ -257,7 +270,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Statistical ML-1 @基本概念
+            Statistical ML-1 @Regularization
             <!-- 404 -->
             
         </h1>
@@ -276,7 +289,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">0</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.5k</span>Reading time: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -405,7 +418,102 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        
+        <h1 id="机器学习中的正则化"><a href="#机器学习中的正则化" class="headerlink" title="机器学习中的正则化"></a>机器学习中的正则化</h1><h3 id="什么是正则化、ML为什么要加入正则化"><a href="#什么是正则化、ML为什么要加入正则化" class="headerlink" title="什么是正则化、ML为什么要加入正则化"></a>什么是正则化、ML为什么要加入正则化</h3><p>答案是防止过拟合！</p>
+<p>在当前的机器学习中，其目标无非就是使得“机器”学习到的东西与真实值的误差最小，也即loss函数的最小化问题，而正则化项就是跟在误差函数（残差、方差等）项后面的小跟班，但它的作用巨大，通俗来讲，正则化项就是对误差函数的约束。<br>$$<br>Loss=min[C\sum_{i=1}^m \ell(f(x_i),y_i) +\Omega(f)]<br>$$<br>上面给出的是一般的loss函数表达式，Loss=误差函数（经验风险）+正则化项（结构风险），结构风险用于描述模型f的某些性质，经验风险描述模型与训练数据的契合程度，系数C是对二者的折中调节，</p>
+<p>从经验风险最小的角度来看，正则化项表述了我们所需要的模型具有哪些性质（比如复杂度较小的模型），另一方面，该信息有助于消减假设空间，从而降低了最小化训练误差的过拟合风险。</p>
+<hr>
+<h3 id="正则化项防止过拟合的数学依据"><a href="#正则化项防止过拟合的数学依据" class="headerlink" title="正则化项防止过拟合的数学依据"></a>正则化项防止过拟合的数学依据</h3><p>带约束的最优解问题！</p>
+<p>也就是高数中我们熟悉的用拉格朗日乘子法求解有约束的多元函数（此处多元就是ML中待优化的参数）的最优解问题。</p>
+<p>常见的正则化有L1正则化和L2正则化（L1和L2范数）</p>
+<h5 id="L1正则化"><a href="#L1正则化" class="headerlink" title="L1正则化"></a>L1正则化</h5><p>假设下面公式为带有L1正则化的损失函数：<br>$$<br>J=J_0+\lambda\sum_{w} |w|<br>$$<br>λ为正则化系数，求和项为参数w的L1范数，我们的目标就是求在正则化项约束下的J0的最小值的解（J0是w的函数）。</p>
+<p>考虑二维情况（参数只有两个，w1和w2，y=w1*x+w2），直观地用图来表示，J0在正则化约束下的最优解就是两个函数图像的交点，这里涉及到<strong>误差函数等值线</strong>绘制的问题，如下图，可以看出只有两个参数的情况下loss值的等高线是一圈圈的椭圆构成（类比地理中的等高线）</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B5RRgI"><img src="https://s1.ax1x.com/2020/11/07/B5RRgI.png" alt="B5RRgI.png"></a></p>
+<p>现在将正则化项和误差项函数的图像绘制在同一张图内，如下图:</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B5RWvt"><img src="https://s1.ax1x.com/2020/11/07/B5RWvt.png" alt="B5RWvt.png"></a><br>正方形图像就是二维参数的L1范数，图中二者图像的交点就是Loss值最小情况下的参数最优解</p>
+<p>最重要的一点就是，对于大多数的情况下（高维同理），正则化项与误差项的交点大概率在正则化图形的顶点位置，此时的参数取值有很大的特点：大多数参数为0，也即起到稀疏参数的作用。</p>
+<p>正则化系数λ可以控制矩形的大小，λ越大时矩形越小，交点的参数值也越小，起到了防止过拟合的效果。</p>
+<p><em>注：模型参数w越小，会对输入的波动越不敏感，泛化性也就越好，不会过拟合</em></p>
+<p>L1正则化结论：</p>
+<ul>
+<li><p>可以产生稀疏模型，用于特征选择；</p>
+</li>
+<li><p>可以通过系数λ调整最优解参数值的大小，防止模型过拟合；</p>
+</li>
+</ul>
+<hr>
+<h5 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h5><p>假设下面公式为带有L2正则化的损失函数：<br>$$<br>J=J_0+\lambda\sum_{w} w^2<br>$$</p>
+<p>直接上图：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B55DtU"><img src="https://s1.ax1x.com/2020/11/07/B55DtU.png" alt="B55DtU.png"></a></p>
+<p>相比于L1正则化的有棱有角，L2非常圆润了，这也就导致它与误差等值线的交点不会在每个坐标轴上了。</p>
+<p>我们可以通过调整超参数λ的大小就可以控制最优解参数的大小，理论上，λ越大，参数值越小模型抗干扰能力越强（泛化性越好），但是太小也会导致欠拟合问题。</p>
+<p>L1正则化结论：</p>
+<ul>
+<li>可以通过正则化系数λ调整模型最优化参数的大小，防止过拟合问题</li>
+</ul>
+<hr>
+<h3 id="Python代码实例：最小二乘法-Regularization"><a href="#Python代码实例：最小二乘法-Regularization" class="headerlink" title="Python代码实例：最小二乘法+Regularization"></a>Python代码实例：最小二乘法+Regularization</h3><p>目标：</p>
+<p>用多项式拟合含有噪声的正弦曲线（最小二乘法）</p>
+<p>加入正则化项后看对防过拟合化的效果</p>
+<hr>
+<p>最小二乘法</p>
+<p>高斯在1923年证明：在误差e1….en独立同分布的假定下，在所有无偏的线性估计类中，最小二乘法的方差是最小的。</p>
+<p>一般的n次多项式为：<br>$$<br>H(x)=w_0+w_1x+w_2x^2+……w_nx^n\    \    \   \     \ (其中w(w_0,w_1,…w_n)为参数向量)<br>$$</p>
+<p>在numpy中，函数numpy.poly1d可以生成多项式(最多9项多项式)：<br>$$<br>numpy.poly1d([1,2,3])\   生成  \  1x^3+2x^2+3x^0<br>$$</p>
+<hr>
+<p>实验结果：</p>
+<ol>
+<li><p>用1阶多项式去拟合sinx函数</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BoSjTU"><img src="https://s1.ax1x.com/2020/11/08/BoSjTU.png" alt="BoSjTU.png"></a></p>
+</li>
+<li><p>用2阶多项式去拟合sinx函数</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BoSxkF"><img src="https://s1.ax1x.com/2020/11/08/BoSxkF.png" alt="BoSxkF.png"></a></p>
+</li>
+<li><p>用9阶多项式去拟合sinx函数</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BoSXwT"><img src="https://s1.ax1x.com/2020/11/08/BoSXwT.png" alt="BoSXwT.png"></a></p>
+<p>很明显看出9阶出现了过拟合现象！</p>
+</li>
+<li><p>在9阶过拟合的基础上加入正则化项（L1和L2）,比较图像和参数的变化</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bopvut"><img src="https://s1.ax1x.com/2020/11/08/Bopvut.png" alt="Bopvut.png"></a></p>
+<p>参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Fitting Parameters: [ <span class="number">2.40165365e+04</span> <span class="number">-1.06312246e+05</span>  <span class="number">1.96350137e+05</span> <span class="number">-1.96005788e+05</span></span><br><span class="line">  <span class="number">1.14375619e+05</span> <span class="number">-3.92930434e+04</span>  <span class="number">7.57204942e+03</span> <span class="number">-7.34962607e+02</span></span><br><span class="line">  <span class="number">3.13564458e+01</span>  <span class="number">1.64245245e-01</span>]</span><br><span class="line">L2-regularization Fitting Parameters: [ <span class="number">-0.96000046</span>   <span class="number">2.23214447</span> <span class="number">-12.4939504</span>  <span class="number">-10.99453088</span>  <span class="number">25.87544279</span>   <span class="number">45.98654132</span> <span class="number">-62.343297</span>     <span class="number">7.61083485</span>   <span class="number">4.77292332</span>   <span class="number">0.1371952</span> ]</span><br><span class="line">L1-regularization Fitting Parameters: [ <span class="number">-7.9917126</span>   <span class="number">-1.32912612</span>   <span class="number">4.26645519</span>   <span class="number">7.80969548</span>   <span class="number">7.80783148</span>    <span class="number">2.4829943</span>   <span class="number">-7.91896255</span> <span class="number">-12.42940149</span>   <span class="number">7.00719629</span>   <span class="number">0.12632974</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结论：</p>
+<ul>
+<li><p>参数量过大时会造成过拟合现象</p>
+</li>
+<li><p>L2/L1正则化很明显将参数值变小，提高抗噪能力</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li><p>正则化系数λ的影响</p>
+<p>λ=0.001</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bopvut"><img src="https://s1.ax1x.com/2020/11/08/Bopvut.png" alt="Bopvut.png"></a></p>
+<p>λ=1</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bo9hGQ"><img src="https://s1.ax1x.com/2020/11/08/Bo9hGQ.png" alt="Bo9hGQ.png"></a></p>
+<p>λ=0.00001</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bo9fPg"><img src="https://s1.ax1x.com/2020/11/08/Bo9fPg.png" alt="Bo9fPg.png"></a></p>
+</li>
+</ol>
+<p>​    结论：</p>
+<ul>
+<li><p>​    正则化系数λ过大时，参数会很小，容易噪声欠拟合；</p>
+</li>
+<li><p>​    正则化系数λ过小时，参数会较大，容易噪声过拟合；</p>
+</li>
+</ul>
+<h3 id="参考与代码"><a href="#参考与代码" class="headerlink" title="参考与代码"></a>参考与代码</h3><blockquote>
+<ul>
+<li>《机器学习》-周志华</li>
+<li>《统计学习方法》-李航</li>
+<li>公众号：机器学习初学者</li>
+<li>数学论证：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jinping_shi/article/details/52433975">https://blog.csdn.net/jinping_shi/article/details/52433975</a></li>
+<li>等值线：<a target="_blank" rel="noopener" href="https://blog.csdn.net/keeppractice/article/details/105620966">https://blog.csdn.net/keeppractice/article/details/105620966</a></li>
+<li>代码：<a target="_blank" rel="noopener" href="https://github.com/ApolloDPP/statistical_ML">https://github.com/ApolloDPP/statistical_ML</a></li>
+</ul>
+</blockquote>
+
     </article>
     <!-- license  -->
     
@@ -554,7 +662,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">机器学习中的正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%A3%E5%88%99%E5%8C%96%E3%80%81ML%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%8A%A0%E5%85%A5%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">1.0.1.</span> <span class="toc-text">什么是正则化、ML为什么要加入正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E9%A1%B9%E9%98%B2%E6%AD%A2%E8%BF%87%E6%8B%9F%E5%90%88%E7%9A%84%E6%95%B0%E5%AD%A6%E4%BE%9D%E6%8D%AE"><span class="toc-number">1.0.2.</span> <span class="toc-text">正则化项防止过拟合的数学依据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#L1%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">L1正则化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#L2%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">L2正则化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%EF%BC%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95-Regularization"><span class="toc-number">1.0.3.</span> <span class="toc-text">Python代码实例：最小二乘法+Regularization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%B8%8E%E4%BB%A3%E7%A0%81"><span class="toc-number">1.0.4.</span> <span class="toc-text">参考与代码</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -634,9 +742,33 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 7
+        Total : 9
         </div>
         <!-- search  -->
         
@@ -656,6 +788,16 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2020/11/07/ML%20conception/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/03</span><a class="archive-post-title" href= "/2020/11/03/DL-Tools%20Visdom/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">10/30</span><a class="archive-post-title" href= "/2020/10/30/Sharing-WHAT%20YOU%20WANT!/" >Sharing @WHAT YOU WANT!</a>
         </li>
     
@@ -671,7 +813,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/26</span><a class="archive-post-title" href= "/2020/10/26/Statistical%20ML_1/" >Statistical ML-1 @基本概念</a>
+            <span class="archive-post-date">10/26</span><a class="archive-post-title" href= "/2020/10/26/Statistical%20ML_1/" >Statistical ML-1 @Regularization</a>
         </li>
     
     
