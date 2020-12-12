@@ -20,13 +20,20 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
+    <meta name="description" content="title :DL-FCNFCN：Fully Convolutional Networks  FCN的思想来源FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：  限制输入图像的尺寸； 信息冗余，参数量巨大，消耗算力；  而FCN恰好都可以解决这两个问题，可以实现任意尺寸图像端到端的训练，">
+<meta property="og:type" content="article">
 <meta property="og:title" content="ApolloDPP">
-<meta property="og:url" content="http://example.com/archives/2020/12/index.html">
+<meta property="og:url" content="http://example.com/2020/12/12/DL-FCN/index.html">
 <meta property="og:site_name" content="ApolloDPP">
+<meta property="og:description" content="title :DL-FCNFCN：Fully Convolutional Networks  FCN的思想来源FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：  限制输入图像的尺寸； 信息冗余，参数量巨大，消耗算力；  而FCN恰好都可以解决这两个问题，可以实现任意尺寸图像端到端的训练，">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/12/rZFxEQ.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/12/rZGs1K.png">
+<meta property="article:published_time" content="2020-12-12T13:32:34.493Z">
+<meta property="article:modified_time" content="2020-12-12T13:32:02.884Z">
 <meta property="article:author" content="ApolloDPP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/12/rZFxEQ.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
@@ -211,12 +218,23 @@
 <meta name="generator" content="Hexo 5.2.0"></head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ApolloDPP&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name"></a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>ApolloDPP's Studio.</a>
 </header>
@@ -228,24 +246,68 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            [Untitled Post]
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">641</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/12/12</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -346,102 +408,115 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/12/12/DL-FCN/" >
-            
-                <span>[Untitled Post]</span>
-        </a>
-        <div class="abstract-content">
-            
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/12</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <hr>
+<h2 id="title-DL-FCN"><a href="#title-DL-FCN" class="headerlink" title="title :DL-FCN"></a>title :DL-FCN</h2><h1 id="FCN：Fully-Convolutional-Networks"><a href="#FCN：Fully-Convolutional-Networks" class="headerlink" title="FCN：Fully Convolutional Networks"></a>FCN：Fully Convolutional Networks</h1><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rZFxEQ"><img src="https://s3.ax1x.com/2020/12/12/rZFxEQ.jpg" alt="rZFxEQ.jpg"></a></p>
+<hr>
+<h2 id="FCN的思想来源"><a href="#FCN的思想来源" class="headerlink" title="FCN的思想来源"></a>FCN的思想来源</h2><p>FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：</p>
+<ul>
+<li>限制输入图像的尺寸；</li>
+<li>信息冗余，参数量巨大，消耗算力；</li>
+</ul>
+<p>而FCN恰好都可以解决这两个问题，可以实现任意尺寸图像端到端的训练，而且在分类/语义分割任务中，其效果也是丝毫不亚于含有FC层的经典网络。</p>
+<hr>
+<h2 id="FC层的Conv化"><a href="#FC层的Conv化" class="headerlink" title="FC层的Conv化"></a>FC层的Conv化</h2><p>将VGG19的FC层替换为卷积层：</p>
+<p>FC层：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(classifier): Sequential(</span><br><span class="line">   (<span class="number">0</span>): Linear(in_features=<span class="number">25088</span>, out_features=<span class="number">4096</span>, bias=<span class="literal">True</span>)</span><br><span class="line">   (<span class="number">1</span>): ReLU(inplace=<span class="literal">True</span>)</span><br><span class="line">   (<span class="number">2</span>): Dropout(p=<span class="number">0.5</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">   (<span class="number">3</span>): Linear(in_features=<span class="number">4096</span>, out_features=<span class="number">4096</span>, bias=<span class="literal">True</span>)</span><br><span class="line">   (<span class="number">4</span>): ReLU(inplace=<span class="literal">True</span>)</span><br><span class="line">   (<span class="number">5</span>): Dropout(p=<span class="number">0.5</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">   (<span class="number">6</span>): Linear(in_features=<span class="number">4096</span>, out_features=<span class="number">1000</span>, bias=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Conv层：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#self.fc6 = nn.Linear(512*7*7, 4096)</span></span><br><span class="line">self.fc6 = nn.Conv2d(<span class="number">512</span>, <span class="number">4096</span>, <span class="number">7</span>)</span><br><span class="line">self.relu6 = nn.ReLU(inplace=<span class="literal">True</span>)</span><br><span class="line">self.drop6 = nn.Dropout()</span><br><span class="line"></span><br><span class="line"><span class="comment">#self.fc7 = nn.Linear(4096, 4096)</span></span><br><span class="line">self.fc7 = nn.Conv2d(<span class="number">4096</span>, <span class="number">4096</span>, <span class="number">1</span>)</span><br><span class="line">self.relu7 = nn.ReLU(inplace=<span class="literal">True</span>)</span><br><span class="line">self.drop7 = nn.Dropout()</span><br><span class="line"></span><br><span class="line"><span class="comment">#self.score = nn.Linear(4096, n_class)</span></span><br><span class="line">self.score = nn.Conv2d(<span class="number">4096</span>, n_class, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>转化之后参数量的计算：</p>
+<p>FC：25088×4096=102,760,448</p>
+<p>Conv：512×4096×7×7=102,760,448</p>
+<p>两者参数量相同！！！</p>
+<hr>
+<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><p>FCN原文中将VGG19上采样（转置卷积）为输出大小与输入大小相同，用来语义分割，不同深度的融合（FCN-4s/8s/32s），其效果不同。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rZGs1K"><img src="https://s3.ax1x.com/2020/12/12/rZGs1K.png" alt="rZGs1K.png"></a></p>
+<p><strong>以FCN-4s结构为例：</strong></p>
+<p>难点在于计算融合层大小的计算（crop和offset的计算）</p>
+<p>crop是encoder与decoder层之间大小匹配所作的裁剪大小（单边）;</p>
+<p>offset是output的尺寸匹配input的尺寸所作的裁剪大小（单边）；</p>
+<ul>
+<li>encoder与decoder相加需要channels相同：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.score_fr = nn.Conv2d(<span class="number">4096</span>, n_class, <span class="number">1</span>) <span class="comment">#n_class=21类</span></span><br><span class="line">self.trans_f4 = nn.Conv2d(<span class="number">512</span>, n_class, <span class="number">1</span>)</span><br><span class="line">self.trans_f3 = nn.Conv2d(<span class="number">256</span>, n_class, <span class="number">1</span>)</span><br><span class="line">self.trans_f2 = nn.Conv2d(<span class="number">128</span>, n_class, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>encoder与decoder相加需要尺寸相同：（5为此层encoder与decoder之间的crop值）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h = h[:, :, <span class="number">5</span>:<span class="number">5</span> + up2_feat.size(<span class="number">2</span>), <span class="number">5</span>:<span class="number">5</span> + up2_feat.size(<span class="number">3</span>)] <span class="comment">#上采样2倍的层</span></span><br><span class="line">h = h + up2_feat</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>output与input大小的匹配:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h = self.up32times(h)</span><br><span class="line">final_scores = h[:, :, <span class="number">33</span>:<span class="number">33</span> + x.size(<span class="number">2</span>), <span class="number">33</span>:<span class="number">33</span> + x.size(<span class="number">3</span>)].contiguous() <span class="comment">#offset=33</span></span><br></pre></td></tr></table></figure>
+
+
+<p>验证FCN-4s：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vgg_model = VGG_19bn_4s()</span><br><span class="line">x = torch.randn((<span class="number">2</span>, <span class="number">3</span>, <span class="number">58</span>, <span class="number">58</span>), dtype=torch.float32)</span><br><span class="line">y = vgg_model(x)</span><br><span class="line">print(y.shape)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.Size([<span class="number">2</span>, <span class="number">21</span>, <span class="number">58</span>, <span class="number">58</span>])</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，经过VGG19卷积化并且上采样进行语义分割得到的输出图与输入图的大小相同！</p>
+<p><em>注：FCN-2s其结构与Unet非常相似，只是Unet中没有FC转Conv部分！</em></p>
+<hr>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><blockquote>
+<p>FCN论文：<a target="_blank" rel="noopener" href="https://github.com/ApolloDPP/paper">https://github.com/ApolloDPP/paper</a></p>
+<p>代码：<a target="_blank" rel="noopener" href="https://github.com/ApolloDPP/DL/blob/master/FCN.ipynb">https://github.com/ApolloDPP/DL/blob/master/FCN.ipynb</a></p>
+</blockquote>
+
     </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/12/12/DL-Convolutions/" >
-            
-                <span>DL-Convolutions</span>
-        </a>
-        <div class="abstract-content">
-            
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/12</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/12/04/HMM/" >
-            
-                <span>HMM</span>
-        </a>
-        <div class="abstract-content">
-            
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/04</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/12/01/Bilinear_interpolation/" >
-            
-                <span>Bilinear_interpolation三种算法实现</span>
-        </a>
-        <div class="abstract-content">
-            
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/01</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
+    <!-- license  -->
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/12/12/DL-Convolutions/" title= "DL-Convolutions">
+                    <div class="prevTitle">DL-Convolutions</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= https://livere.com/>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -519,6 +594,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-DL-FCN"><span class="toc-number">1.</span> <span class="toc-text">title :DL-FCN</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FCN%EF%BC%9AFully-Convolutional-Networks"><span class="toc-number"></span> <span class="toc-text">FCN：Fully Convolutional Networks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#FCN%E7%9A%84%E6%80%9D%E6%83%B3%E6%9D%A5%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">FCN的思想来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FC%E5%B1%82%E7%9A%84Conv%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">FC层的Conv化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">python代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">参考：</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -851,6 +944,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
