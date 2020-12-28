@@ -20,23 +20,37 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="Hi 这是本咸鱼博客的开篇之作！！！ Excited！首篇博客内容当然要应景，那就来推一首宇宙天团五月天的《憨人》！！！（主要是熟悉一下写博客的步骤）   音频               视频 微博视频地址：http:&#x2F;&#x2F;t.cn&#x2F;A6ZfhLOA?m&#x3D;4487835992511701&amp;u&#x3D;1265020392  B站视频地址：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video">
+    <meta name="description" content="[TOC]  重要概念     MLE &amp; MAP频率派VS贝叶斯派相同点：都是对模型$p(x,\theta)$中$\theta$的求解。 本质区别：对模型$p(x,\theta)$中$\theta$的认知不同。  频率派：认为$\theta $是一个固定值，可以根据观测值计算其频率（古典概型），比如，硬币实验，当5次实验中3次正面向上时，在频率派认为，正面朝上的概率为$\frac{3}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hi  salt-fish ApolloDPP!">
-<meta property="og:url" content="http://example.com/2020/10/24/first_blog/index.html">
+<meta property="og:title" content="Introduction-1">
+<meta property="og:url" content="http://example.com/2020/12/28/Statistical%20ML-1/index.html">
 <meta property="og:site_name" content="ApolloDPP">
-<meta property="og:description" content="Hi 这是本咸鱼博客的开篇之作！！！ Excited！首篇博客内容当然要应景，那就来推一首宇宙天团五月天的《憨人》！！！（主要是熟悉一下写博客的步骤）   音频               视频 微博视频地址：http:&#x2F;&#x2F;t.cn&#x2F;A6ZfhLOA?m&#x3D;4487835992511701&amp;u&#x3D;1265020392  B站视频地址：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video">
+<meta property="og:description" content="[TOC]  重要概念     MLE &amp; MAP频率派VS贝叶斯派相同点：都是对模型$p(x,\theta)$中$\theta$的求解。 本质区别：对模型$p(x,\theta)$中$\theta$的认知不同。  频率派：认为$\theta $是一个固定值，可以根据观测值计算其频率（古典概型），比如，硬币实验，当5次实验中3次正面向上时，在频率派认为，正面朝上的概率为$\frac{3}">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s1.ax1x.com/2020/10/21/BPBQrn.jpg">
-<meta property="article:published_time" content="2020-10-24T03:02:53.089Z">
-<meta property="article:modified_time" content="2020-10-26T08:21:34.361Z">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/28/r7SBnJ.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/28/r7FJAJ.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/28/r7F874.jpg">
+<meta property="og:image" content="https://s3.ax1x.com/2020/11/11/Bvm4RU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/07/B5RRgI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/07/B5RWvt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/07/B55DtU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/BoSjTU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/BoSxkF.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/BoSXwT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bopvut.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bopvut.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bo9hGQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/11/08/Bo9fPg.png">
+<meta property="article:published_time" content="2020-12-28T13:26:49.870Z">
+<meta property="article:modified_time" content="2020-12-28T13:26:23.903Z">
 <meta property="article:author" content="ApolloDPP">
+<meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s1.ax1x.com/2020/10/21/BPBQrn.jpg">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/28/r7SBnJ.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Hi  salt-fish ApolloDPP! · ApolloDPP&#39;s Studio</title>
+    <title>Introduction-1 · ApolloDPP&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -231,7 +245,7 @@
                 <a href="/" >ApolloDPP&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Hi  salt-fish ApolloDPP!</a>
+                <a href="#" class="post-name">Introduction-1</a>
             </div>
     </div>
     
@@ -261,7 +275,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Hi  salt-fish ApolloDPP!
+            Introduction-1
             <!-- 404 -->
             
         </h1>
@@ -278,14 +292,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "ML">ML</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">515</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.9k</span>Reading time: <span class="post-count reading-time">11 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/10/24</span>
+                    <span class="post-intro-time">2020/12/28</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -409,78 +429,139 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Hi-这是本咸鱼博客的开篇之作！！！"><a href="#Hi-这是本咸鱼博客的开篇之作！！！" class="headerlink" title="Hi 这是本咸鱼博客的开篇之作！！！"></a>Hi 这是本咸鱼博客的开篇之作！！！</h1><hr>
-<p>Excited！首篇博客内容当然要应景，那就来推一首宇宙天团五月天的《憨人》！！！（主要是熟悉一下写博客的步骤）</p>
+        <hr>
+<p>[TOC]</p>
 <hr>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BPBQrn"><img src="https://s1.ax1x.com/2020/10/21/BPBQrn.jpg" alt="BPBQrn.jpg"></a></p>
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h3><p><audio id="audio" controls="" preload="none">       <source id="mp3" src="https://github.com/ApolloDPP/blog_image/blob/main/saltfish.mp3">       </audio></p>
-<h3 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h3><ul>
-<li><p>微博视频地址：<a target="_blank" rel="noopener" href="http://t.cn/A6ZfhLOA?m=4487835992511701&amp;u=1265020392">http://t.cn/A6ZfhLOA?m=4487835992511701&amp;u=1265020392</a></p>
-</li>
-<li><p>B站视频地址：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1m541147j7?from=search&amp;seid=16536925257464260681">https://www.bilibili.com/video/BV1m541147j7?from=search&amp;seid=16536925257464260681</a></p>
-</li>
+<h1 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h1><p><img src="https://s3.ax1x.com/2020/12/28/r7SBnJ.jpg" alt="r7SBnJ.jpg"></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r7FJAJ"><img src="https://s3.ax1x.com/2020/12/28/r7FJAJ.jpg" alt="r7FJAJ.jpg"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r7F874"><img src="https://s3.ax1x.com/2020/12/28/r7F874.jpg" alt="r7F874.jpg"></a></p>
+<p><img src="https://s3.ax1x.com/2020/11/11/Bvm4RU.png" alt="Bvm4RU.png"></p>
+<hr>
+<h1 id="MLE-amp-MAP"><a href="#MLE-amp-MAP" class="headerlink" title="MLE &amp; MAP"></a>MLE &amp; MAP</h1><h3 id="频率派VS贝叶斯派"><a href="#频率派VS贝叶斯派" class="headerlink" title="频率派VS贝叶斯派"></a>频率派VS贝叶斯派</h3><p>相同点：都是对模型$p(x,\theta)$中$\theta$的求解。</p>
+<p>本质区别：对模型$p(x,\theta)$中$\theta$的认知不同。</p>
+<ul>
+<li>频率派：认为$\theta $是一个固定值，可以根据观测值计算其频率（古典概型），比如，硬币实验，当5次实验中3次正面向上时，在频率派认为，正面朝上的概率为$\frac{3}{5}$，显然，当观测数据很少时，会出现很大的误差，观测量的增加会使得估计的$\theta $更加精确；</li>
+<li>贝叶斯派：认为$\theta$为一个变量，且服从一定的概率分布$p(\theta)$,假设在抛硬币实验中，在少量实验中观测到正面朝上的频率为$\frac{3}{5}$时，贝叶斯派不会马上断定在硬币实验中正面朝上的概率为此，而是会考虑自己的经验（先验知识），对$\frac{3}{5}$进行修正。观测量的增加会逐渐减少先验的比重。</li>
 </ul>
-<h3 id="歌词"><a href="#歌词" class="headerlink" title="歌词"></a>歌词</h3><ul>
-<li><p>欣赏一下这朴实无华的歌词hhhhhh……</p>
+<h3 id="MLE-最大似然估计与均方误差损失"><a href="#MLE-最大似然估计与均方误差损失" class="headerlink" title="MLE-最大似然估计与均方误差损失"></a>MLE-最大似然估计与均方误差损失</h3><p><em>注：似然和概率的意义相同，只是在模型$p(x,\theta )$中，由参数 $\theta $预测数据$x$时为概率，由数据$x$预测参数$\theta$时称为似然。</em></p>
+<p>MLE数学公式推导</p>
+<p>假设$x_1,x_2,…x_n$为一组观测值<br>$$<br>\begin{aligned}</p>
+<p>\widehat{\theta}<em>{MLE}&amp;=argmax\prod</em>{i=1}^n P(x_i;\theta)\<br>&amp;\cong argmax \ log \prod_{i=1}^n P(x_i;\theta)\<br>&amp;=argmax\sum_{i=1}^nlogP(x_i;\theta)\<br>&amp;\cong \color{blue}{ argmin\ -\sum_{i=1}^nlogP(x_i;\theta)}\</p>
+<p>\end{aligned}<br>$$</p>
+<p><em>注：公式最后一行涉及负对数似然NLL（Negtive Log Likehood）,在loss函数中计算中引入NLL就是为了使得loss取对数后是正值且下降的。</em></p>
+<p>ML中的MLE：均方误差损失</p>
+<p>在机器学习中，不同的模型对应不同的$P_{model}(y_i|x_i;\theta)$,在训练模型过程中，从条件概率的角度来分析，我们希望利用训练集的数据$(x_i,y_i)$使参数$\theta $的似然函数最大，也即对参数最好的估计。</p>
+<p>由中心极限定理，我们假设模型$P(Y|X;\theta)$为高斯分布(<em>模型是一个条件概率模型</em>)，即$Y\sim\mathcal{N}(Y,\mu,\sigma^2)$,由高斯分布的性质可知，我们应该使$y_i$的值越接近均值，也即$Y\sim\mathcal{N}(Y,f(x;\theta),\sigma^2)$.<br>$$<br>\begin{aligned}<br>\widehat \theta &amp;=argmin\ -log\sum_{i=1}^{n}P_{model}(y_i|x_i;\theta)\<br>\<br>&amp;=argmin\ -\sum_{i=1}^{n} log\mathcal{N}(Y|X;\theta,\sigma^2)\<br>\<br>&amp;=argmin\ -\sum_{i=1}^{n}log[\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(y_i-f(x_i;\theta))^2}{2\sigma^2}}]\<br>\<br>&amp;=argmin\ -\sum_{i=1}^{n}[log\frac{1}{\sqrt{2\pi}\sigma}-log\frac{(y_i-f(x_i;\theta))^2}{2\sigma^2}]\<br>\<br>&amp;\propto argmin\ \sum_{i=1}^{n}(y_i-f(x_i;\theta))^2</p>
+<p>\end{aligned}<br>$$<br>由上式可以看出，当我们假设模型为高斯分布时，使用极大似然函数对参数 $\theta$估计等价于使用均方误差函数MSE对函数进行拟合。 </p>
+<h3 id="MAP-最大后验估计与贝叶斯推断"><a href="#MAP-最大后验估计与贝叶斯推断" class="headerlink" title="MAP-最大后验估计与贝叶斯推断"></a>MAP-最大后验估计与贝叶斯推断</h3><p>贝叶斯公式解析</p>
+<p>假设$x_1,x_2,…x_n$为一组观测值<br>$$<br>\begin{aligned}<br>\begin{matrix}\underbrace{P(\theta|x_1,x_2,…,x_n)}\ 后验\end{matrix}<br>&amp;=\frac{P(x_1,x_2,…,x_n|\theta)P(\theta)}{P(x_1,x_2,…,x_n)}\<br>\<br>&amp;\cong<br>\color{maroon}\begin{matrix}\underbrace{P(x_1,x_2,…,x_n|\theta)}\ 似然度\end{matrix}<br>\color{blue}\begin{matrix}\underbrace{P(\theta)}\ 先验\end{matrix}<br>\end{aligned}<br>$$<br>MAP数学公式推导：</p>
+<p>假设$x_1,x_2,…x_n$为一组观测值<br>$$<br>\begin{aligned}<br>\widehat\theta &amp;=argmax P(\theta|x_1,x_2,…x_n)\<br>\<br>&amp;=argmax \frac{P(x_1,x_2,…x_n|\theta)P(\theta)}{P(x_1,x_2,…x_n)}\<br>\<br>&amp;\cong argmax \ logP(x_1,x_2,…x_n|\theta)+logP(\theta)-logP(x_1,x_2,…x_n)\<br>\<br>&amp;\cong \color{blue}argmin -logP(x_1,x_2,…x_n|\theta)-logP(\theta)+logP(x_1,x_2,…x_n)\<br>\</p>
+<p>&amp;\propto\color{maroon}argmin-logP(x_1,x_2,…x_n|\theta)-logP(\theta)\<br>\<br>&amp;=argmin\ -log\sum_{i=1}^{n}P(x_i;\theta)-logP(\theta)<br>\end{aligned}<br>$$<br><em>注：第二步使用了贝叶斯公式，第四步同理使用NLL，第五步舍去与参数 $\theta$无关从项，而公式最后的$P(\theta)$是参数 $\theta$的先验</em></p>
+<p>MAP与贝叶斯推断</p>
+<p>在求出最大后验估计，也即$P(\theta|X)$已知后，其后验作为一个桥梁，连接训练数据和预测数据，即：<br>$$<br>P(x_{n+1}|x_1,x_2,…x_n)=\int P(x_{n+1}|\theta)P(\theta|x_1,x_2,…,x_n)d\theta<br>$$<br>在上式中，显然在严格的贝叶斯推断中，将参数$\theta$所有可能的值都考虑进去了，所以这个积分很难计算出来，每一次参数的变化都需要网络进行前向传播一次，计算代价太高，所以，我们只用后验概率最大的参数$\theta $作为参数的点估计，这样既能将先验知识加入模型的推断中，也能大大减少计算资源的消耗。即如下：<br>$$<br>\widehat\theta=-\sum_{i=1}^{n}logP(x_i;\theta)-logP(\theta)<br>$$</p>
+<h3 id="ML中-MLE与MAP的联系"><a href="#ML中-MLE与MAP的联系" class="headerlink" title="ML中 MLE与MAP的联系"></a>ML中 MLE与MAP的联系</h3><p>在具体的网络算法实现中，观察MAP和MLE中参数$\theta$的估计式，显然$\theta_{MAP}=\theta_{MLE}-logP(\theta)$，因为严格的贝叶斯推断计算量太大，所以在实际中MAP的前一项用MLE来表示，后一项正是贝叶斯派和频率派之间的本质区别项：先验项。</p>
+<p>当$P(\theta)$为正太分布时，$logP(\theta) \propto \theta^2$，而该项恰巧是损失函数的正则化项！</p>
+<p>结论：在实际的神经网络应用中，MAP是在MLE的基础上加入先验约束</p>
+<hr>
+<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><h4 id="什么是正则化、ML为什么要加入正则化"><a href="#什么是正则化、ML为什么要加入正则化" class="headerlink" title="什么是正则化、ML为什么要加入正则化"></a>什么是正则化、ML为什么要加入正则化</h4><p>答案是防止过拟合！</p>
+<p>在当前的机器学习中，其目标无非就是使得“机器”学习到的东西与真实值的误差最小，也即loss函数的最小化问题，而正则化项就是跟在误差函数（残差、方差等）项后面的小跟班，但它的作用巨大，通俗来讲，正则化项就是对误差函数的约束。下式是模型结构风险的定义式:<br>$$<br>\min_{f\in\mathcal{F}}=\frac{1}{N}\sum_{i=1}^{N}L(y_i,f(x_i))+\lambda J(f)<br>$$</p>
 <blockquote>
-<p>歌曲名：咸鱼</p>
-<p>演唱者：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%94%E6%9C%88%E5%A4%A9">五月天</a></p>
-<p>所属专辑：知足 Just My Pride 最真杰作选</p>
-<p>唱片公司：滚石唱片</p>
-<p>我的心内感觉</p>
-<p>人生的沉重 不敢来振动</p>
-<p>我不是好子 嘛不是歹人</p>
-<p>我只是爱眠梦</p>
-<p>我不愿随浪随风</p>
-<p>飘浪西东 亲像船无港</p>
-<p>我不愿做人 奸巧钻缝</p>
-<p>甘愿来作憨人</p>
-<p>我不是头脑空空</p>
-<p>我不是一只米虫</p>
-<p>人啊人 一世人</p>
-<p>要安怎欢喜 过春夏秋冬</p>
-<p>我有我的路 有我的梦</p>
-<p>梦中的那个世界</p>
-<p>甘讲伊是一场空</p>
-<p>我走过的路 只有希望</p>
-<p>希望你我讲过的话</p>
-<p>放在心肝内 总有一天</p>
-<p>看到满天全金条</p>
-<p>要煞无半项 环境来戏弄</p>
-<p>背景无够强 天才无够弄</p>
-<p>逐项是拢输人</p>
-<p>只好看破这虚华</p>
-<p>不怕路歹行不怕大雨淋</p>
-<p>心上一字敢 面对我的梦</p>
-<p>甘愿来作憨人</p>
-<p>我不是头脑空空</p>
-<p>我不是一只米虫</p>
-<p>人啊人 一世人</p>
-<p>要安怎欢喜 过春夏秋冬</p>
-<p>我有我的路 有我的梦</p>
-<p>梦中的那个世界</p>
-<p>甘讲伊是一场空</p>
-<p>我走过的路 只有希望</p>
-<p>希望你我讲过的话</p>
-<p>放在心肝内</p>
-<p>总有一天</p>
-<p>我有我的路 有我的梦</p>
-<p>梦中的那个世界</p>
-<p>甘讲伊是一场空</p>
-<p>我走过的路 只有希望</p>
-<p>希望你我讲过的话</p>
-<p>放在心肝内</p>
-<p>总有一天</p>
-<p>我知影 总会有一天</p>
-<p>啦 啦 啦……</p>
-<p>我有我的路 我有我的梦</p>
-<p>总会有一天 总会有一天</p>
-<p>啦……</p>
+<p>结构风险函数由经验风险函数+正则化项组成，其中$J(f)$表示模型的复杂度，是定义在假设空间$\mathcal{F}$上的泛函，模型$f$越复杂，$J(f)$就越大；也即，模型复杂度表示了对复杂模型的惩罚程度，模型越复杂，则惩罚越大；$\lambda\ge0$,用来权衡经验风险和模型复杂度。                                                                                            ————《统计学习方法》</p>
 </blockquote>
-<hr>
-<p>咸鱼之路开启，噔噔噔！！！</p>
+<p>从经验风险最小的角度来看，正则化项表述了我们所需要的模型具有哪些性质（比如复杂度较小的模型），另一方面，该信息有助于消减假设空间，从而降低了最小化训练误差的过拟合风险。</p>
+<h4 id="正则化项防止过拟合的数学依据"><a href="#正则化项防止过拟合的数学依据" class="headerlink" title="正则化项防止过拟合的数学依据"></a>正则化项防止过拟合的数学依据</h4><p>带约束的最优解问题！</p>
+<p>也就是高数中我们熟悉的用拉格朗日乘子法求解有约束的多元函数（此处多元就是ML中待优化的参数）的最优解问题。</p>
+<p>常见的正则化有L1正则化和L2正则化（L1和L2范数）</p>
+<p><strong>L1正则化</strong></p>
+<p>假设下面公式为带有L1正则化的损失函数：<br>$$<br>J=J_0+\lambda\sum_{w} |w|<br>$$<br>λ为正则化系数，求和项为参数w的L1范数，我们的目标就是求在正则化项约束下的J0的最小值的解（J0是w的函数）。</p>
+<p>考虑二维情况（参数只有两个，w1和w2，y=w1*x+w2），直观地用图来表示，J0在正则化约束下的最优解就是两个函数图像的交点，这里涉及到<strong>误差函数等值线</strong>绘制的问题，如下图，可以看出只有两个参数的情况下loss值的等高线是一圈圈的椭圆构成（类比地理中的等高线）</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B5RRgI"><img src="https://s1.ax1x.com/2020/11/07/B5RRgI.png" alt="B5RRgI.png"></a></p>
+<p>现在将正则化项和误差项函数的图像绘制在同一张图内，如下图:</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B5RWvt"><img src="https://s1.ax1x.com/2020/11/07/B5RWvt.png" alt="B5RWvt.png"></a><br>正方形图像就是二维参数的L1范数，图中二者图像的交点就是Loss值最小情况下的参数最优解</p>
+<p>最重要的一点就是，对于大多数的情况下（高维同理），正则化项与误差项的交点大概率在正则化图形的顶点位置，此时的参数取值有很大的特点：大多数参数为0，也即起到稀疏参数的作用。</p>
+<p>正则化系数λ可以控制矩形的大小，λ越大时矩形越小，交点的参数值也越小，起到了防止过拟合的效果。</p>
+<p><em>注：模型参数w越小，会对输入的波动越不敏感，泛化性也就越好，不会过拟合</em></p>
+<p>L1正则化结论：</p>
+<ul>
+<li><p>可以产生稀疏模型，用于特征选择；</p>
+</li>
+<li><p>可以通过系数λ调整最优解参数值的大小，防止模型过拟合；</p>
 </li>
 </ul>
+<hr>
+<p><strong>L2正则化</strong></p>
+<p>假设下面公式为带有L2正则化的损失函数：<br>$$<br>J=J_0+\lambda\sum_{w} w^2<br>$$</p>
+<p>直接上图：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B55DtU"><img src="https://s1.ax1x.com/2020/11/07/B55DtU.png" alt="B55DtU.png"></a></p>
+<p>相比于L1正则化的有棱有角，L2非常圆润了，这也就导致它与误差等值线的交点不会在每个坐标轴上了。</p>
+<p>我们可以通过调整超参数λ的大小就可以控制最优解参数的大小，理论上，λ越大，参数值越小模型抗干扰能力越强（泛化性越好），但是太小也会导致欠拟合问题。</p>
+<p>L1正则化结论：</p>
+<ul>
+<li>可以通过正则化系数λ调整模型最优化参数的大小，防止过拟合问题</li>
+</ul>
+<hr>
+<h1 id="Python-验证正则化"><a href="#Python-验证正则化" class="headerlink" title="Python 验证正则化"></a>Python 验证正则化</h1><h3 id="Python代码实例：最小二乘法-Regularization"><a href="#Python代码实例：最小二乘法-Regularization" class="headerlink" title="Python代码实例：最小二乘法+Regularization"></a>Python代码实例：最小二乘法+Regularization</h3><p>目标：</p>
+<p>用多项式拟合含有噪声的正弦曲线（最小二乘法）</p>
+<p>加入正则化项后看对防过拟合化的效果</p>
+<hr>
+<p>最小二乘法</p>
+<p>高斯在1923年证明：在误差e1….en独立同分布的假定下，在所有无偏的线性估计类中，最小二乘法的方差是最小的。</p>
+<p>一般的n次多项式为：<br>$$<br>H(x)=w_0+w_1x+w_2x^2+……w_nx^n\    \    \   \     \ (其中w(w_0,w_1,…w_n)为参数向量)<br>$$</p>
+<p>在numpy中，函数numpy.poly1d可以生成多项式(最多9项多项式)：<br>$$<br>numpy.poly1d([1,2,3])\   生成  \  1x^3+2x^2+3x^0<br>$$</p>
+<hr>
+<p>实验结果：</p>
+<ol>
+<li><p>用1阶多项式去拟合sinx函数</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BoSjTU"><img src="https://s1.ax1x.com/2020/11/08/BoSjTU.png" alt="BoSjTU.png"></a></p>
+</li>
+<li><p>用2阶多项式去拟合sinx函数</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BoSxkF"><img src="https://s1.ax1x.com/2020/11/08/BoSxkF.png" alt="BoSxkF.png"></a></p>
+</li>
+<li><p>用9阶多项式去拟合sinx函数</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BoSXwT"><img src="https://s1.ax1x.com/2020/11/08/BoSXwT.png" alt="BoSXwT.png"></a></p>
+<p>很明显看出9阶出现了过拟合现象！</p>
+</li>
+<li><p>在9阶过拟合的基础上加入正则化项（L1和L2）,比较图像和参数的变化</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bopvut"><img src="https://s1.ax1x.com/2020/11/08/Bopvut.png" alt="Bopvut.png"></a></p>
+<p>参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Fitting Parameters: [ <span class="number">2.40165365e+04</span> <span class="number">-1.06312246e+05</span>  <span class="number">1.96350137e+05</span> <span class="number">-1.96005788e+05</span>   <span class="number">1.14375619e+05</span> <span class="number">-3.92930434e+04</span>  <span class="number">7.57204942e+03</span> <span class="number">-7.34962607e+02</span>  <span class="number">3.13564458e+01</span>  <span class="number">1.64245245e-01</span>]</span><br><span class="line">L2-regularization Fitting Parameters: [ <span class="number">-0.96000046</span>   <span class="number">2.23214447</span> <span class="number">-12.4939504</span>  <span class="number">-10.99453088</span>  <span class="number">25.87544279</span>   <span class="number">45.98654132</span> <span class="number">-62.343297</span>     <span class="number">7.61083485</span>   <span class="number">4.77292332</span>   <span class="number">0.1371952</span> ]</span><br><span class="line">L1-regularization Fitting Parameters: [ <span class="number">-7.9917126</span>   <span class="number">-1.32912612</span>   <span class="number">4.26645519</span>   <span class="number">7.80969548</span>   <span class="number">7.80783148</span>    <span class="number">2.4829943</span>   <span class="number">-7.91896255</span> <span class="number">-12.42940149</span>   <span class="number">7.00719629</span>   <span class="number">0.12632974</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结论：</p>
+<ul>
+<li><p>参数量过大时会造成过拟合现象</p>
+</li>
+<li><p>L2/L1正则化很明显将参数值变小，提高抗噪能力</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li><p>正则化系数λ的影响</p>
+<p>λ=0.001</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bopvut"><img src="https://s1.ax1x.com/2020/11/08/Bopvut.png" alt="Bopvut.png"></a></p>
+<p>λ=1</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bo9hGQ"><img src="https://s1.ax1x.com/2020/11/08/Bo9hGQ.png" alt="Bo9hGQ.png"></a></p>
+<p>λ=0.00001</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bo9fPg"><img src="https://s1.ax1x.com/2020/11/08/Bo9fPg.png" alt="Bo9fPg.png"></a></p>
+</li>
+</ol>
+<p>​    结论：</p>
+<ul>
+<li><p>​    正则化系数λ过大时，参数会很小，容易噪声欠拟合；</p>
+</li>
+<li><p>​    正则化系数λ过小时，参数会较大，容易噪声过拟合；</p>
+</li>
+</ul>
+<h1 id="参考-amp-代码"><a href="#参考-amp-代码" class="headerlink" title="参考 &amp; 代码"></a>参考 &amp; 代码</h1><blockquote>
+<ul>
+<li>《统计学习方法》-李航</li>
+<li>《机器学习》-周志华</li>
+<li>李宏毅老师：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18V411o7fX?from=search&amp;seid=6768437851540989209">https://www.bilibili.com/video/BV18V411o7fX?from=search&amp;seid=6768437851540989209</a></li>
+<li>数学论证：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jinping_shi/article/details/52433975">https://blog.csdn.net/jinping_shi/article/details/52433975</a></li>
+<li>等值线：<a target="_blank" rel="noopener" href="https://blog.csdn.net/keeppractice/article/details/105620966">https://blog.csdn.net/keeppractice/article/details/105620966</a></li>
+<li>代码：<a target="_blank" rel="noopener" href="https://github.com/ApolloDPP/statistical_ML">https://github.com/ApolloDPP/statistical_ML</a></li>
+</ul>
+</blockquote>
 
     </article>
     <!-- license  -->
@@ -489,13 +570,13 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/10/24/Darknet1_install/" title= "DL-Tools @Darknet 框架介绍 与 安装">
-                    <div class="nextTitle">DL-Tools @Darknet 框架介绍 与 安装</div>
-                </a>
-            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/12/22/Speech%20Recognition/" title= "Speech Recognition CNN+CTC">
+                    <div class="prevTitle">Speech Recognition CNN+CTC</div>
+                </a>
             
         </li>
     </ul>
@@ -625,7 +706,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hi-%E8%BF%99%E6%98%AF%E6%9C%AC%E5%92%B8%E9%B1%BC%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%BC%80%E7%AF%87%E4%B9%8B%E4%BD%9C%EF%BC%81%EF%BC%81%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">Hi 这是本咸鱼博客的开篇之作！！！</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.0.0.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91"><span class="toc-number">1.0.1.</span> <span class="toc-text">音频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91"><span class="toc-number">1.0.2.</span> <span class="toc-text">视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%8C%E8%AF%8D"><span class="toc-number">1.0.3.</span> <span class="toc-text">歌词</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">重要概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MLE-amp-MAP"><span class="toc-number">2.</span> <span class="toc-text">MLE &amp; MAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%91%E7%8E%87%E6%B4%BEVS%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B4%BE"><span class="toc-number">2.0.1.</span> <span class="toc-text">频率派VS贝叶斯派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MLE-%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E4%B8%8E%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AE%E6%8D%9F%E5%A4%B1"><span class="toc-number">2.0.2.</span> <span class="toc-text">MLE-最大似然估计与均方误差损失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAP-%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%E4%B8%8E%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD"><span class="toc-number">2.0.3.</span> <span class="toc-text">MAP-最大后验估计与贝叶斯推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ML%E4%B8%AD-MLE%E4%B8%8EMAP%E7%9A%84%E8%81%94%E7%B3%BB"><span class="toc-number">2.0.4.</span> <span class="toc-text">ML中 MLE与MAP的联系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%A3%E5%88%99%E5%8C%96%E3%80%81ML%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%8A%A0%E5%85%A5%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">什么是正则化、ML为什么要加入正则化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E9%A1%B9%E9%98%B2%E6%AD%A2%E8%BF%87%E6%8B%9F%E5%90%88%E7%9A%84%E6%95%B0%E5%AD%A6%E4%BE%9D%E6%8D%AE"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">正则化项防止过拟合的数学依据</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-%E9%AA%8C%E8%AF%81%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">Python 验证正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%EF%BC%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95-Regularization"><span class="toc-number">4.0.1.</span> <span class="toc-text">Python代码实例：最小二乘法+Regularization</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83-amp-%E4%BB%A3%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">参考 &amp; 代码</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
