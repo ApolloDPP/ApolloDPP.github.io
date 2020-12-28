@@ -20,24 +20,24 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="date:2013-05FCN：Fully Convolutional Networks  FCN的思想来源FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：  限制输入图像的尺寸； 信息冗余，参数量巨大，消耗算力；  而FCN恰好都可以解决这两个问题，可以实现任意尺寸图像端到端的训练，而">
+    <meta name="description" content="FCN：Fully Convolutional Networks  FCN的思想来源FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：  限制输入图像的尺寸； 信息冗余，参数量巨大，消耗算力；  而FCN恰好都可以解决这两个问题，可以实现任意尺寸图像端到端的训练，而且在分类&#x2F;语义分割任务中，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ApolloDPP">
+<meta property="og:title" content="DL-FCN">
 <meta property="og:url" content="http://example.com/2020/12/12/DL-FCN/index.html">
 <meta property="og:site_name" content="ApolloDPP">
-<meta property="og:description" content="date:2013-05FCN：Fully Convolutional Networks  FCN的思想来源FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：  限制输入图像的尺寸； 信息冗余，参数量巨大，消耗算力；  而FCN恰好都可以解决这两个问题，可以实现任意尺寸图像端到端的训练，而">
+<meta property="og:description" content="FCN：Fully Convolutional Networks  FCN的思想来源FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：  限制输入图像的尺寸； 信息冗余，参数量巨大，消耗算力；  而FCN恰好都可以解决这两个问题，可以实现任意尺寸图像端到端的训练，而且在分类&#x2F;语义分割任务中，">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s3.ax1x.com/2020/12/12/rZFxEQ.jpg">
 <meta property="og:image" content="https://s3.ax1x.com/2020/12/12/rZGs1K.png">
 <meta property="article:published_time" content="2020-12-12T13:32:34.493Z">
-<meta property="article:modified_time" content="2020-12-28T03:42:22.211Z">
+<meta property="article:modified_time" content="2020-12-28T03:46:54.304Z">
 <meta property="article:author" content="ApolloDPP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s3.ax1x.com/2020/12/12/rZFxEQ.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>ApolloDPP&#39;s Studio</title>
+    <title>DL-FCN · ApolloDPP&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -232,7 +232,7 @@
                 <a href="/" >ApolloDPP&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name"></a>
+                <a href="#" class="post-name">DL-FCN</a>
             </div>
     </div>
     
@@ -262,7 +262,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            [Untitled Post]
+            DL-FCN
             <!-- 404 -->
             
         </h1>
@@ -281,7 +281,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">641</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                        <span>Word count: <span class="post-count word-count">639</span>Reading time: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -410,8 +410,7 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <hr>
-<h2 id="date-2013-05"><a href="#date-2013-05" class="headerlink" title="date:2013-05"></a>date:2013-05</h2><h1 id="FCN：Fully-Convolutional-Networks"><a href="#FCN：Fully-Convolutional-Networks" class="headerlink" title="FCN：Fully Convolutional Networks"></a>FCN：Fully Convolutional Networks</h1><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rZFxEQ"><img src="https://s3.ax1x.com/2020/12/12/rZFxEQ.jpg" alt="rZFxEQ.jpg"></a></p>
+        <h1 id="FCN：Fully-Convolutional-Networks"><a href="#FCN：Fully-Convolutional-Networks" class="headerlink" title="FCN：Fully Convolutional Networks"></a>FCN：Fully Convolutional Networks</h1><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rZFxEQ"><img src="https://s3.ax1x.com/2020/12/12/rZFxEQ.jpg" alt="rZFxEQ.jpg"></a></p>
 <hr>
 <h2 id="FCN的思想来源"><a href="#FCN的思想来源" class="headerlink" title="FCN的思想来源"></a>FCN的思想来源</h2><p>FCN顾名思义，就是将模型中的FC（全连接层）都用卷积层替换，作为DL中较早的算法，FC层简单来说是一个线性分类器（感知机），但是在其也存在两个非常大的缺陷：</p>
 <ul>
@@ -615,7 +614,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#date-2013-05"><span class="toc-number">1.</span> <span class="toc-text">date:2013-05</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FCN%EF%BC%9AFully-Convolutional-Networks"><span class="toc-number"></span> <span class="toc-text">FCN：Fully Convolutional Networks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#FCN%E7%9A%84%E6%80%9D%E6%83%B3%E6%9D%A5%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">FCN的思想来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FC%E5%B1%82%E7%9A%84Conv%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">FC层的Conv化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">python代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">参考：</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FCN%EF%BC%9AFully-Convolutional-Networks"><span class="toc-number">1.</span> <span class="toc-text">FCN：Fully Convolutional Networks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#FCN%E7%9A%84%E6%80%9D%E6%83%B3%E6%9D%A5%E6%BA%90"><span class="toc-number">1.1.</span> <span class="toc-text">FCN的思想来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FC%E5%B1%82%E7%9A%84Conv%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">FC层的Conv化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.</span> <span class="toc-text">python代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">1.4.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -811,7 +810,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2020/12/12/DL-FCN/" >[Untitled Post]</a>
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2020/12/12/DL-FCN/" >DL-FCN</a>
         </li>
     
     
