@@ -20,28 +20,17 @@
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="基于CNN+CTCLoss的语音识别  我理解的语音识别的本质：对语音提取特征序列，然后对特征序列解码成我们所需要的文字。 我们主要算法都是在特征提取和解码方法上进行研究。  基于HMM的语音识别 用这一张图来解释经典的语音识别HMM算法  红色框，表示我们平常的语音信号；  绿色框，表示我们从语音信号中提取的特征（因为音频只在时域表达的信息太有限了）。提取声学特征的方法很多，比如（１）传统的MF">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Speech Recognition CNN+CTC">
-<meta property="og:url" content="http://example.com/2020/12/22/Speech%20Recognition/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="ApolloDPP">
+<meta property="og:url" content="http://example.com/categories/Pytorch/index.html">
 <meta property="og:site_name" content="ApolloDPP">
-<meta property="og:description" content="基于CNN+CTCLoss的语音识别  我理解的语音识别的本质：对语音提取特征序列，然后对特征序列解码成我们所需要的文字。 我们主要算法都是在特征提取和解码方法上进行研究。  基于HMM的语音识别 用这一张图来解释经典的语音识别HMM算法  红色框，表示我们平常的语音信号；  绿色框，表示我们从语音信号中提取的特征（因为音频只在时域表达的信息太有限了）。提取声学特征的方法很多，比如（１）传统的MF">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s3.ax1x.com/2020/12/01/Dhvmss.jpg">
-<meta property="og:image" content="https://s3.ax1x.com/2020/12/22/rDz78g.png">
-<meta property="og:image" content="https://s3.ax1x.com/2020/12/22/rrkFf0.png">
-<meta property="og:image" content="https://s3.ax1x.com/2020/12/22/rrVsc6.png">
-<meta property="og:image" content="https://s3.ax1x.com/2020/12/22/rrZyPs.png">
-<meta property="og:image" content="https://s3.ax1x.com/2020/12/22/rrJX9K.png">
-<meta property="article:published_time" content="2020-12-22T09:06:19.295Z">
-<meta property="article:modified_time" content="2020-12-22T09:06:08.687Z">
 <meta property="article:author" content="ApolloDPP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/01/Dhvmss.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Speech Recognition CNN+CTC · ApolloDPP&#39;s Studio</title>
+    <title>ApolloDPP&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -222,23 +211,12 @@
 <meta name="generator" content="Hexo 5.2.0"></head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >ApolloDPP&#39;s Studio.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">Speech Recognition CNN+CTC</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>ApolloDPP's Studio.</a>
 </header>
@@ -250,68 +228,24 @@
 
 
 
-
-height:50vh;
 ">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            Speech Recognition CNN+CTC
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                
-                    <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.4k</span>Reading time: <span class="post-count reading-time">5 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/12/22</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -412,118 +346,39 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h1 id="基于CNN-CTCLoss的语音识别"><a href="#基于CNN-CTCLoss的语音识别" class="headerlink" title="基于CNN+CTCLoss的语音识别"></a>基于CNN+CTCLoss的语音识别</h1><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Dhvmss"><img src="https://s3.ax1x.com/2020/12/01/Dhvmss.jpg" alt="Dhvmss.jpg"></a></p>
-<blockquote>
-<p>我理解的语音识别的本质：对语音提取特征序列，然后对特征序列解码成我们所需要的文字。</p>
-<p>我们主要算法都是在特征提取和解码方法上进行研究。</p>
-</blockquote>
-<h2 id="基于HMM的语音识别"><a href="#基于HMM的语音识别" class="headerlink" title="基于HMM的语音识别"></a>基于HMM的语音识别</h2><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rDz78g"><img src="https://s3.ax1x.com/2020/12/22/rDz78g.png" alt="rDz78g.png"></a></p>
-<p>用这一张图来解释经典的语音识别HMM算法</p>
-<ul>
-<li><p>红色框，表示我们平常的语音信号；</p>
-</li>
-<li><p>绿色框，表示我们从语音信号中提取的特征（因为音频只在时域表达的信息太有限了）。提取声学特征的方法很多，比如（１）传统的MFCC 39点特征法；（２）语谱图经过CNN特征提取；</p>
-<p>特征部分的横轴：我们提取到的特征的序列长度，也可以理解为在时域一帧一帧地处理语音信号（比如25ms/1帧）；</p>
-<p>特征部分的纵轴：每个序列点对应的状态，在HMM中也就是隐藏的状态链，在HMM语音识别中，在“解码”预测文本的过程其<strong>实质就是在“序列-状态”形成的空间搜索最优化路径，得到最大概率的那条状态链</strong>，比如第1帧（这儿表示序列的一个元素，也即横轴的一个小格，以英文单词预测为例）中可能的状态有26个英文字母，第2帧也是26个字母，依次类推…….，但是每帧中的每个字母出现的概率不同，从左上角开始遍历整个空间，生成一个序列的预测，就是遍历每个可能的路径，计算每个预测出的结果的概率，概率最大的序列就是我们所需要的。</p>
-</li>
-<li><p>橙色框，表示我们每帧对应的状态遍历得到所有路径生成序列中概率最大的一条序列，这儿序列暂定为HMM的状态链，然后状态连经过解码，生成音素，因素经过“再解码”生成文字。</p>
-</li>
-</ul>
-<hr>
-<h2 id="基于CNN-CTCLoss的语音识别-1"><a href="#基于CNN-CTCLoss的语音识别-1" class="headerlink" title="基于CNN+CTCLoss的语音识别"></a>基于CNN+CTCLoss的语音识别</h2><p>为什么要选择CNN来提取特征？</p>
-<ul>
-<li>CNN相对与序列预测模型性能很好的RNN+LSTM而言，也具有很大的特点，上下文语义联系，因为CNN的感受野易于调节；</li>
-<li>相比于RNN+LSTM，CNN可以用在实时语音识别系统，因为前者在联系上下文语义的时候需要一段语音的积累，所以前者比较适合离线语音识别；</li>
-<li>速度快，对于在特征提取部分，CNN已经有很成熟的加速算法，而且对于语音识别中CNN的网络不是很深，所以特征提取部分的速度会很快；</li>
-</ul>
-<h4 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rrkFf0"><img src="https://s3.ax1x.com/2020/12/22/rrkFf0.png" alt="rrkFf0.png"></a></p>
-<ul>
-<li>CNN部分:语谱图经过多层卷积进行特征提取,总共3次maxpooling降采样(更深层不可取是因为受CTC的输入限制);</li>
-<li>CNN与CTC之间的桥梁:Dense层将CNN特征图的形状转换为CTCloss函数的需要的形状;</li>
-<li>CTC部分为本系统的Loss计算部分,会直接生成我们所需要的文本信息;</li>
-</ul>
-<hr>
-<h2 id="关键技术CTC原理"><a href="#关键技术CTC原理" class="headerlink" title="关键技术CTC原理"></a>关键技术CTC原理</h2><p>CTC:Connectionist Temporal Classification 时间序列分类</p>
-<p>提出的目的:解决序列预测中序列与标签需要一一映射的人工标注问题,(比如语音识别SR,文本识别OCR),下面这张图可以更加形象的理解.</p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rrVsc6"><img src="https://s3.ax1x.com/2020/12/22/rrVsc6.png" alt="rrVsc6.png"></a></p>
-<p>以语音识别为例,在引入CTCloss之前,传统的RNN序列预测需要对每帧语音进行标签的标注,工作量巨大,非常不现实.但是CTC就可以避免中间一对一的映射标注问题,完全实现端对端的训练预测.</p>
-<h4 id="CTC关键技术1-多对一映射-对齐"><a href="#CTC关键技术1-多对一映射-对齐" class="headerlink" title="CTC关键技术1:多对一映射(对齐)"></a>CTC关键技术1:多对一映射(对齐)</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rrZyPs"><img src="https://s3.ax1x.com/2020/12/22/rrZyPs.png" alt="rrZyPs.png"></a></p>
-<p>避免了传统RNN中输入序列与标签之间的一对一映射标注困难,CTC将标签扩充成与特征序列相当的长度,这就会有许多种方法来扩充,如上图右边所示,这4中扩充的标签其实本质是同一个label:apple ,其和HMM的区别在于引入了空格符号”_”</p>
-<h4 id="CTC关键技术2-动态规划"><a href="#CTC关键技术2-动态规划" class="headerlink" title="CTC关键技术2:动态规划"></a>CTC关键技术2:动态规划</h4><p>第一个关键技术解决了一对一映射 的问题,接下来到了找到这些多对一的多路径,然后计算概率得到预测结果,但是直接方法暴力枚举的计算复杂度太大,在此借鉴了HMM的forward-backward算法.</p>
-<p>注:与HMM的区别,走的路径约束不同,且HMM没有空格”_”</p>
-<ul>
-<li>HMM只能从左上角开始,只能向右或者右下角走,不能跨越,最终走到右下角,这期间所有的路径走过的标签是相同的;</li>
-<li>CTC因为开头和结尾,还有每个字母之间加入了空格,所以开始可以是空格”_”,也可以是”a”,并且在其他位置除了向右和向右下,还可以右下大跨越1格(<strong>大跨越只能用于空格的大跨越</strong>);</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rrJX9K"><img src="https://s3.ax1x.com/2020/12/22/rrJX9K.png" alt="rrJX9K.png"></a></p>
-<p>前向算法:图中黄色区域的点为例,a3(4)=P(_ap)+P(aap)+P(a_p)+P(app)</p>
-<p>依次类推,通过迭代的方法就可以向右下逐渐计算出所有路径的概率之和.</p>
-<p>注:<em>计算复杂度O(TN^T)→O(N</em>NT)</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
-<p>HMM语音识别:<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20398418/answer/18080841">https://www.zhihu.com/question/20398418/answer/18080841</a></p>
-<p>CTC原理:<a target="_blank" rel="noopener" href="https://xiaodu.io/ctc-explained/">https://xiaodu.io/ctc-explained/</a></p>
-<p>CNN语音识别:<a target="_blank" rel="noopener" href="https://xueshu.baidu.com/usercenter/paper/show?paperid=be5348048dd263aced0f2bdc75a535e8&amp;site=xueshu_se&amp;hitarticle=1">https://xueshu.baidu.com/usercenter/paper/show?paperid=be5348048dd263aced0f2bdc75a535e8&amp;site=xueshu_se&amp;hitarticle=1</a></p>
-<p>代码实现:<a target="_blank" rel="noopener" href="https://github.com/ApolloDPP/DL/blob/master/Speech%20Recognition.ipynb">https://github.com/ApolloDPP/DL/blob/master/Speech%20Recognition.ipynb</a></p>
-<p>CTCLoss函数使用:<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/67415439">https://zhuanlan.zhihu.com/p/67415439</a></p>
-</blockquote>
-
+            <main class="main index-page">
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/01/22/Pytorch%20Tricks/" >
+            
+                <span>Pytorch Tricks</span>
+        </a>
+        <div class="abstract-content">
+            
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/22</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Tools">Tools</a>
+    
+</div>
+            
+        </div>
     </article>
-    <!-- license  -->
     
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2021/01/22/Pytorch%20Tricks/" title= "Pytorch Tricks">
-                    <div class="nextTitle">Pytorch Tricks</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/12/12/DL-FCN/" title= "DL-FCN">
-                    <div class="prevTitle">DL-FCN</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-    <div id="lv-container" data-id="city" data-uid= https://livere.com/>
-        <script type="text/javascript">
-            (function (d, s) {
-                var j, e = d.getElementsByTagName(s)[0];
-                if (typeof LivereTower === 'function') { return; }
-                j = d.createElement(s);
-                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                j.async = true;
-
-                e.parentNode.insertBefore(j, e);
-            })(document, 'script');
-        </script>
-        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-    </div>
-
-<!-- City版安装代码已完成 -->
     
-    
-    <!-- gitalk评论 -->
-
-    <!-- utteranc评论 -->
-
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
-
-
-    
-    
-
-    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -601,24 +456,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8ECNN-CTCLoss%E7%9A%84%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">基于CNN+CTCLoss的语音识别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EHMM%E7%9A%84%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB"><span class="toc-number">1.1.</span> <span class="toc-text">基于HMM的语音识别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8ECNN-CTCLoss%E7%9A%84%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB-1"><span class="toc-number">1.2.</span> <span class="toc-text">基于CNN+CTCLoss的语音识别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">网络结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AFCTC%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">关键技术CTC原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CTC%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF1-%E5%A4%9A%E5%AF%B9%E4%B8%80%E6%98%A0%E5%B0%84-%E5%AF%B9%E9%BD%90"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">CTC关键技术1:多对一映射(对齐)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CTC%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF2-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">CTC关键技术2:动态规划</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.4.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1004,8 +841,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

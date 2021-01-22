@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="ApolloDPP">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="ApolloDPP">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="指定GPU编号 设置当前使用的GPU设备仅为0号设备，设备名称为 &#x2F;gpu:0：os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] &#x3D; &quot;0&quot;  设置当前使用的GPU设备为0,1号两个设备，名称依次为 &#x2F;gpu:0、&#x2F;gpu:1： os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] &#x3D; &quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch Tricks">
+<meta property="og:url" content="http://example.com/2021/01/22/Pytorch%20Tricks/index.html">
+<meta property="og:site_name" content="ApolloDPP">
+<meta property="og:description" content="指定GPU编号 设置当前使用的GPU设备仅为0号设备，设备名称为 &#x2F;gpu:0：os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] &#x3D; &quot;0&quot;  设置当前使用的GPU设备为0,1号两个设备，名称依次为 &#x2F;gpu:0、&#x2F;gpu:1： os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] &#x3D; &quot;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/16/srZNnJ.jpg">
+<meta property="article:published_time" content="2021-01-22T04:29:02.180Z">
+<meta property="article:modified_time" content="2021-01-22T04:28:53.392Z">
+<meta property="article:author" content="ApolloDPP">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/16/srZNnJ.jpg">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>Pytorch Tricks · ApolloDPP&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ApolloDPP&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Pytorch Tricks</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>ApolloDPP's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Pytorch Tricks
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Tools">Tools</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2k</span>Reading time: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/01/22</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p><a target="_blank" rel="noopener" href="https://imgchr.com/i/srZNnJ"><img src="https://s3.ax1x.com/2021/01/16/srZNnJ.jpg" alt="srZNnJ.jpg"></a></p>
+<hr>
+<h3 id="指定GPU编号"><a href="#指定GPU编号" class="headerlink" title="指定GPU编号"></a>指定GPU编号</h3><ul>
+<li><p>设置当前使用的GPU设备仅为0号设备，设备名称为 <code>/gpu:0</code>：<code>os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] = &quot;0&quot;</code></p>
+</li>
+<li><p>设置当前使用的GPU设备为0,1号两个设备，名称依次为 <code>/gpu:0</code>、<code>/gpu:1</code>：</p>
+<p><code>os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] = &quot;0,1&quot;</code> ，根据顺序表示优先使用0号设备,然后使用1号设备。</p>
+</li>
+</ul>
+<p><em>指定GPU的命令需要放在和神经网络相关的一系列操作的前面！！！</em></p>
+<h3 id="查看模型每层输出详情"><a href="#查看模型每层输出详情" class="headerlink" title="查看模型每层输出详情"></a>查看模型每层输出详情</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torchsummary <span class="keyword">import</span> summary</span><br><span class="line">summary(your_model, input_size=(channels, H, W))</span><br></pre></td></tr></table></figure>
+
+<p><code>input_size</code> 是根据你自己的网络模型的输入尺寸进行设置。</p>
+<h3 id="梯度裁剪（Gradient-Clipping）"><a href="#梯度裁剪（Gradient-Clipping）" class="headerlink" title="梯度裁剪（Gradient Clipping）"></a>梯度裁剪（Gradient Clipping）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line">outputs = model(data)</span><br><span class="line">loss= loss_fn(outputs, target)</span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">loss.backward()</span><br><span class="line">nn.utils.clip_grad_norm_(model.parameters(), max_norm=<span class="number">20</span>, norm_type=<span class="number">2</span>)</span><br><span class="line">optimizer.step()</span><br></pre></td></tr></table></figure>
+
+<p><code>nn.utils.clip_grad_norm_</code> 的参数：</p>
+<ul>
+<li><strong>parameters</strong> – 一个基于变量的迭代器，会进行梯度归一化</li>
+<li><strong>max_norm</strong> – 梯度的最大范数</li>
+<li><strong>norm_type</strong> – 规定范数的类型，默认为L2</li>
+</ul>
+<h3 id="扩展单张图片维度"><a href="#扩展单张图片维度" class="headerlink" title="扩展单张图片维度"></a>扩展单张图片维度</h3><p>因为在训练时的数据维度一般都是 (batch_size, c, h, w)，而在测试时只输入一张图片，所以需要扩展维度，扩展维度有多个方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">image = cv2.imread(img_path)</span><br><span class="line">image = torch.tensor(image)</span><br><span class="line">print(image.size())</span><br><span class="line">img = image.view(<span class="number">1</span>, *image.size())</span><br><span class="line">print(img.size())</span><br><span class="line"></span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment"># torch.Size([h, w, c])</span></span><br><span class="line"><span class="comment"># torch.Size([1, h, w, c])</span></span><br></pre></td></tr></table></figure>
+
+<p>或：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">image = cv2.imread(img_path)</span><br><span class="line">print(image.shape)</span><br><span class="line">img = image[np.newaxis, :, :, :]</span><br><span class="line">print(img.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment"># (h, w, c)</span></span><br><span class="line"><span class="comment"># (1, h, w, c)</span></span><br></pre></td></tr></table></figure>
+
+<p>或：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">image = cv2.imread(img_path)</span><br><span class="line">image = torch.tensor(image)</span><br><span class="line">print(image.size())</span><br><span class="line">img = image.unsqueeze(dim=<span class="number">0</span>)  </span><br><span class="line">print(img.size())</span><br><span class="line">img = img.squeeze(dim=<span class="number">0</span>)</span><br><span class="line">print(img.size())</span><br><span class="line"></span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment"># torch.Size([(h, w, c)])</span></span><br><span class="line"><span class="comment"># torch.Size([1, h, w, c])</span></span><br><span class="line"><span class="comment"># torch.Size([h, w, c])</span></span><br></pre></td></tr></table></figure>
+
+<p><code>tensor.unsqueeze(dim)</code>：扩展维度，dim指定扩展哪个维度。</p>
+<p><code>tensor.squeeze(dim)</code>：去除dim指定的且size为1的维度，维度大于1时，squeeze()不起作用，不指定dim时，去除所有size为1的维度。</p>
+<h3 id="one-hot编码"><a href="#one-hot编码" class="headerlink" title="one-hot编码"></a>one-hot编码</h3><p>在PyTorch中使用交叉熵损失函数的时候会自动把label转化成onehot，所以不用手动转化，而使用MSE需要手动转化成onehot编码。</p>
+<p>Pytorch 1.1后，one_hot可以直接用<code>torch.nn.functional.one_hot</code>。</p>
+<p>具体用法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">tensor =  torch.arange(<span class="number">0</span>, <span class="number">5</span>) % <span class="number">3</span>  </span><br><span class="line"><span class="comment"># tensor([0, 1, 2, 0, 1])</span></span><br><span class="line">one_hot = F.one_hot(tensor)</span><br><span class="line"><span class="comment"># 输出：# tensor([[1, 0, 0],</span></span><br><span class="line"><span class="comment">#         [0, 1, 0],</span></span><br><span class="line"><span class="comment">#         [0, 0, 1],</span></span><br><span class="line"><span class="comment">#         [1, 0, 0],</span></span><br><span class="line"><span class="comment">#         [0, 1, 0]])</span></span><br></pre></td></tr></table></figure>
+
+<p><code>F.one_hot</code>会自己检测不同类别个数，生成对应独热编码。我们也可以自己指定类别数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tensor =  torch.arange(<span class="number">0</span>, <span class="number">5</span>) % <span class="number">3</span>  </span><br><span class="line"><span class="comment"># tensor([0, 1, 2, 0, 1])</span></span><br><span class="line">one_hot = F.one_hot(tensor, num_classes=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># tensor([[1, 0, 0, 0, 0],</span></span><br><span class="line"><span class="comment">#         [0, 1, 0, 0, 0],</span></span><br><span class="line"><span class="comment">#         [0, 0, 1, 0, 0],</span></span><br><span class="line"><span class="comment">#         [1, 0, 0, 0, 0],</span></span><br><span class="line"><span class="comment">#         [0, 1, 0, 0, 0]])</span></span><br></pre></td></tr></table></figure>
+
+<p>升级 Pytorch (cpu版本)的命令：<code>conda install pytorch torchvision \-c pytorch</code></p>
+<h3 id="防止验证模型时爆显存"><a href="#防止验证模型时爆显存" class="headerlink" title="防止验证模型时爆显存"></a>防止验证模型时爆显存</h3><p>验证模型时不需要求导，即不需要梯度计算，关闭autograd，可以提高速度，节约内存。如果不关闭可能会爆显存。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():    <span class="comment"># 使用model进行预测的代码    </span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span> torch.optim <span class="keyword">import</span> lr_scheduler</span><br><span class="line"><span class="comment"># 训练前的初始化</span></span><br><span class="line">optimizer = optim.Adam(net.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line">scheduler = lr_scheduler.StepLR(optimizer, <span class="number">10</span>, <span class="number">0.1</span>)  <span class="comment"># # 每过10个epoch，学习率乘以0.1</span></span><br><span class="line"><span class="comment"># 训练过程中</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> n_epoch:</span><br><span class="line">	scheduler.step()    </span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<p>可以随时查看学习率的值：<code>optimizer.param_groups[0][&#39;lr&#39;]</code>。</p>
+<p>还有其他学习率更新的方式：</p>
+<p>1、自定义更新公式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler = lr_scheduler.LambdaLR(optimizer, lr_lambda=<span class="keyword">lambda</span> epoch:<span class="number">1</span>/(epoch+<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p>2、不依赖epoch更新学习率：</p>
+<p><code>lr_scheduler.ReduceLROnPlateau()</code>提供了基于训练中某些测量值使学习率动态下降的方法，它的参数说明到处都可以查到。<br>提醒一点就是参数 mode=’min’ 还是’max’，取决于优化的的损失还是准确率，即使用 <code>scheduler.step(loss)</code>还是<code>scheduler.step(acc)</code> 。</p>
+<h3 id="冻结某些层的参数"><a href="#冻结某些层的参数" class="headerlink" title="冻结某些层的参数"></a>冻结某些层的参数</h3><p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/311095447/answer/589307812">https://www.zhihu.com/question/311095447/answer/589307812</a></p>
+<p>在加载预训练模型的时候，我们有时想冻结前面几层，使其参数在训练过程中不发生变化。</p>
+<p>我们需要先知道每一层的名字，通过如下代码打印：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net = Network()  </span><br><span class="line"><span class="comment"># 获取自定义网络结构</span></span><br><span class="line"><span class="keyword">for</span> name, value <span class="keyword">in</span> net.named_parameters():    </span><br><span class="line">print(<span class="string">&#x27;name: &#123;0&#125;,\t grad: &#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(name, value.requires_grad))</span><br></pre></td></tr></table></figure>
+
+<p>假设前几层信息如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: cnn.VGG_16.convolution1_1.weight,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution1_1.bias,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution1_2.weight,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution1_2.bias,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution2_1.weight,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution2_1.bias,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution2_2.weight,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution2_2.bias,	 grad: <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>后面的True表示该层的参数可训练，然后我们定义一个要冻结的层的列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">no_grad = [    </span><br><span class="line">	<span class="string">&#x27;cnn.VGG_16.convolution1_1.weight&#x27;</span>,    </span><br><span class="line">	<span class="string">&#x27;cnn.VGG_16.convolution1_1.bias&#x27;</span>,    </span><br><span class="line">	<span class="string">&#x27;cnn.VGG_16.convolution1_2.weight&#x27;</span>,    </span><br><span class="line">	<span class="string">&#x27;cnn.VGG_16.convolution1_2.bias&#x27;</span></span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
+
+<p>冻结方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">net = Net.CTPN()  <span class="comment"># 获取网络结构</span></span><br><span class="line"><span class="keyword">for</span> name, value <span class="keyword">in</span> net.named_parameters():    </span><br><span class="line">	<span class="keyword">if</span> name <span class="keyword">in</span> no_grad:        </span><br><span class="line">		value.requires_grad = <span class="literal">False</span>    </span><br><span class="line">    <span class="keyword">else</span>:        </span><br><span class="line">    	value.requires_grad = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>冻结后我们再打印每层的信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name: cnn.VGG_16.convolution1_1.weight,	 grad: <span class="literal">False</span></span><br><span class="line">name: cnn.VGG_16.convolution1_1.bias,	 grad: <span class="literal">False</span></span><br><span class="line">name: cnn.VGG_16.convolution1_2.weight,	 grad: <span class="literal">False</span></span><br><span class="line">name: cnn.VGG_16.convolution1_2.bias,	 grad: <span class="literal">False</span></span><br><span class="line">name: cnn.VGG_16.convolution2_1.weight,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution2_1.bias,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution2_2.weight,	 grad: <span class="literal">True</span></span><br><span class="line">name: cnn.VGG_16.convolution2_2.bias,	 grad: <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到前两层的weight和bias的requires_grad都为False，表示它们不可训练。</p>
+<p>最后在定义优化器时，只对requires_grad为True的层的参数进行更新。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">optimizer = optim.Adam(<span class="built_in">filter</span>(<span class="keyword">lambda</span> p: p.requires_grad, net.parameters()), lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="对不同层使用不同学习率"><a href="#对不同层使用不同学习率" class="headerlink" title="对不同层使用不同学习率"></a>对不同层使用不同学习率</h3><p>我们对模型的不同层使用不同的学习率。</p>
+<p>还是使用这个模型作为例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">net = Network()  <span class="comment"># 获取自定义网络结构</span></span><br><span class="line"><span class="keyword">for</span> name, value <span class="keyword">in</span> net.named_parameters():    </span><br><span class="line">print(<span class="string">&#x27;name: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(name))</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution1_1.weight</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution1_1.bias</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution1_2.weight</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution1_2.bias</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution2_1.weight</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution2_1.bias</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution2_2.weight</span></span><br><span class="line"><span class="comment"># name: cnn.VGG_16.convolution2_2.bias</span></span><br></pre></td></tr></table></figure>
+
+<p>对 convolution1 和 convolution2 设置不同的学习率，首先将它们分开，即放到不同的列表里：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">conv1_params = []</span><br><span class="line">conv2_params = []</span><br><span class="line"><span class="keyword">for</span> name, parms <span class="keyword">in</span> net.named_parameters():    </span><br><span class="line">	<span class="keyword">if</span> <span class="string">&quot;convolution1&quot;</span> <span class="keyword">in</span> name:        </span><br><span class="line">		conv1_params += [parms]   </span><br><span class="line">    <span class="keyword">else</span>:        </span><br><span class="line">    	conv2_params += [parms]</span><br><span class="line"><span class="comment"># 然后在优化器中进行如下操作：</span></span><br><span class="line">optimizer = optim.Adam(    </span><br><span class="line">	[        </span><br><span class="line">		&#123;<span class="string">&quot;params&quot;</span>: conv1_params, <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.01</span>&#125;,        </span><br><span class="line">		&#123;<span class="string">&quot;params&quot;</span>: conv2_params, <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.001</span>&#125;,    </span><br><span class="line">	],    </span><br><span class="line">	weight_decay=<span class="number">1e-3</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>我们将模型划分为两部分，存放到一个列表里，每部分就对应上面的一个字典，在字典里设置不同的学习率。当这两部分有相同的其他参数时，就将该参数放到列表外面作为全局参数，如上面的<code>weight_decay</code>。</p>
+<p>也可以在列表外设置一个全局学习率，当各部分字典里设置了局部学习率时，就使用该学习率，否则就使用列表外的全局学习率。</p>
+<h3 id="网络参数初始化"><a href="#网络参数初始化" class="headerlink" title="网络参数初始化"></a>网络参数初始化</h3><h3 id="神经网络的初始化是训练流程的重要基础环节，会对模型的性能、收敛性、收敛速度等产生重要的影响。"><a href="#神经网络的初始化是训练流程的重要基础环节，会对模型的性能、收敛性、收敛速度等产生重要的影响。" class="headerlink" title="神经网络的初始化是训练流程的重要基础环节，会对模型的性能、收敛性、收敛速度等产生重要的影响。"></a>神经网络的初始化是训练流程的重要基础环节，会对模型的性能、收敛性、收敛速度等产生重要的影响。</h3><p>以下介绍两种常用的初始化操作。</p>
+<p>(1) 使用pytorch内置的torch.nn.init方法。</p>
+<p>常用的初始化操作，例如正态分布、均匀分布、xavier初始化、kaiming初始化等都已经实现，可以直接使用。具体详见PyTorch 中 torch.nn.init 中文文档。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init.xavier_uniform(net1[<span class="number">0</span>].weight)</span><br></pre></td></tr></table></figure>
+
+<p>(2) 对于一些更加灵活的初始化方法，可以借助numpy。</p>
+<p>对于自定义的初始化方法，有时tensor的功能不如numpy强大灵活，故可以借助numpy实现初始化方法，再转换到tensor上使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> layer <span class="keyword">in</span> net1.modules():    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(layer, nn.Linear): <span class="comment"># 判断是否是线性层        </span></span><br><span class="line">        param_shape = layer.weight.shape        </span><br><span class="line">        layer.weight.data = torch.from_numpy(np.random.normal(<span class="number">0</span>, <span class="number">0.5</span>, size=param_shape))        		 <span class="comment"># 定义为均值为 0，方差为 0.5 的正态分布</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="加载内置预训练模型"><a href="#加载内置预训练模型" class="headerlink" title="加载内置预训练模型"></a>加载内置预训练模型</h3><p><code>torchvision.models</code>模块的子模块中包含以下模型：</p>
+<ul>
+<li>AlexNet</li>
+<li>VGG</li>
+<li>ResNet</li>
+<li>SqueezeNet</li>
+<li>DenseNet</li>
+</ul>
+<p>导入这些模型的方法为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> model</span><br><span class="line">resnet18 = models.resnet18()</span><br><span class="line">alexnet = models.alexnet()</span><br><span class="line">vgg16 = models.vgg16()</span><br></pre></td></tr></table></figure>
+
+<p>有一个很重要的参数为<code>pretrained</code>，默认为<code>False</code>，表示只导入模型的结构，其中的权重是随机初始化的。</p>
+<p>如果<code>pretrained</code> 为 <code>True</code>，表示导入的是在<code>ImageNet</code>数据集上预训练的模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line">resnet18 = models.resnet18(pretrained=<span class="literal">True</span>)</span><br><span class="line">alexnet = models.alexnet(pretrained=<span class="literal">True</span>)</span><br><span class="line">vgg16 = models.vgg16(pretrained=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIxMjg1Njc3Mw==&amp;mid=2247496483&amp;idx=1&amp;sn=9059fba7bf3fb0b11078fd3828c06d83&amp;chksm=97bd0989a0ca809f87b418c84fa160eb509f9e3c76dca1fb87c36a3a56f5d4101fa0d87420ee&amp;mpshare=1&amp;scene=24&amp;srcid=0121Cc6e7rlOoILSS1eesUnM&amp;sharer_sharetime=1611240982815&amp;sharer_shareid=39bfd4e7abac623d625a66f1167382b1#rd">https://mp.weixin.qq.com/s?__biz=MzIxMjg1Njc3Mw==&amp;mid=2247496483&amp;idx=1&amp;sn=9059fba7bf3fb0b11078fd3828c06d83&amp;chksm=97bd0989a0ca809f87b418c84fa160eb509f9e3c76dca1fb87c36a3a56f5d4101fa0d87420ee&amp;mpshare=1&amp;scene=24&amp;srcid=0121Cc6e7rlOoILSS1eesUnM&amp;sharer_sharetime=1611240982815&amp;sharer_shareid=39bfd4e7abac623d625a66f1167382b1#rd</a></p>
+</blockquote>
+
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/12/22/Speech%20Recognition/" title= "Speech Recognition CNN+CTC">
+                    <div class="prevTitle">Speech Recognition CNN+CTC</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= https://livere.com/>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:2661983783@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ApolloDPP" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9AGPU%E7%BC%96%E5%8F%B7"><span class="toc-number">1.</span> <span class="toc-text">指定GPU编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%A8%A1%E5%9E%8B%E6%AF%8F%E5%B1%82%E8%BE%93%E5%87%BA%E8%AF%A6%E6%83%85"><span class="toc-number">2.</span> <span class="toc-text">查看模型每层输出详情</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E8%A3%81%E5%89%AA%EF%BC%88Gradient-Clipping%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">梯度裁剪（Gradient Clipping）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87%E7%BB%B4%E5%BA%A6"><span class="toc-number">4.</span> <span class="toc-text">扩展单张图片维度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#one-hot%E7%BC%96%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">one-hot编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%9E%8B%E6%97%B6%E7%88%86%E6%98%BE%E5%AD%98"><span class="toc-number">6.</span> <span class="toc-text">防止验证模型时爆显存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F"><span class="toc-number">7.</span> <span class="toc-text">学习率衰减</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%BB%E7%BB%93%E6%9F%90%E4%BA%9B%E5%B1%82%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">8.</span> <span class="toc-text">冻结某些层的参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%B8%8D%E5%90%8C%E5%B1%82%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="toc-number">9.</span> <span class="toc-text">对不同层使用不同学习率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%8F%82%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">10.</span> <span class="toc-text">网络参数初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E6%98%AF%E8%AE%AD%E7%BB%83%E6%B5%81%E7%A8%8B%E7%9A%84%E9%87%8D%E8%A6%81%E5%9F%BA%E7%A1%80%E7%8E%AF%E8%8A%82%EF%BC%8C%E4%BC%9A%E5%AF%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%80%A7%E8%83%BD%E3%80%81%E6%94%B6%E6%95%9B%E6%80%A7%E3%80%81%E6%94%B6%E6%95%9B%E9%80%9F%E5%BA%A6%E7%AD%89%E4%BA%A7%E7%94%9F%E9%87%8D%E8%A6%81%E7%9A%84%E5%BD%B1%E5%93%8D%E3%80%82"><span class="toc-number">11.</span> <span class="toc-text">神经网络的初始化是训练流程的重要基础环节，会对模型的性能、收敛性、收敛速度等产生重要的影响。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%86%85%E7%BD%AE%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">12.</span> <span class="toc-text">加载内置预训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">13.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 15
+        </div>
+        <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/22</span><a class="archive-post-title" href= "/2021/01/22/Pytorch%20Tricks/" >Pytorch Tricks</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2020/12/22/Speech%20Recognition/" >Speech Recognition CNN+CTC</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2020/12/12/DL-FCN/" >DL-FCN</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2020/12/12/DL-Convolutions/" >DL-Convolutions</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2020/12/04/HMM/" >HMM</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/01</span><a class="archive-post-title" href= "/2020/12/01/Bilinear_interpolation/" >Bilinear_interpolation三种算法实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/29</span><a class="archive-post-title" href= "/2020/11/29/Dataformat_JSON_XML_CSV/" >Dataformat @JSON&XML&CSV</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2020/11/10/Datasets-MedMNIST/" >Datasets @MedMNIST</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/03</span><a class="archive-post-title" href= "/2020/11/03/DL-Tools%20Visdom/" >DL-Tools @Visdom</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/30</span><a class="archive-post-title" href= "/2020/10/30/Sharing-WHAT%20YOU%20WANT!/" >Sharing @WHAT YOU WANT!</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2020/10/28/Sharing-Matplotlib/" >Sharing @Matplotlib</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2020/10/28/Sharing-AI-interview300/" >Sharing @AI-interview-300</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/2020/10/25/Darknet2_Resnet/" >DL classifier @基于Dark net中Resnet34的图像分类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/Darknet1_install/" >DL-Tools @Darknet 框架介绍 与 安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/first_blog/" >Hi  salt-fish ApolloDPP!</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="DL"><span class="iconfont-archer">&#xe606;</span>DL</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tools"><span class="iconfont-archer">&#xe606;</span>Tools</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Darknet"><span class="iconfont-archer">&#xe60a;</span>Darknet</span>
+    
+        <span class="sidebar-category-name" data-categories="Pytorch"><span class="iconfont-archer">&#xe60a;</span>Pytorch</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "ApolloDPP"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
