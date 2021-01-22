@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="ApolloDPP">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="ApolloDPP">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="一、保存加载模型基本用法1.保存加载整个模型保存整个网络模型（网络结构+权重参数）。 1torch.save(model, &amp;#x27;net.pkl&amp;#x27;)  直接加载整个网络模型（可能比较耗时）。 1model &#x3D; torch.load(&amp;#x27;net.pkl&amp;#x27;)  2.只保存加载模型参数只保存模型的权重参数（速度快，占内存少）。 1torch.save(model.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch model_save&amp;load">
+<meta property="og:url" content="http://example.com/2021/01/22/Pytorch%20model_save_load/index.html">
+<meta property="og:site_name" content="ApolloDPP">
+<meta property="og:description" content="一、保存加载模型基本用法1.保存加载整个模型保存整个网络模型（网络结构+权重参数）。 1torch.save(model, &amp;#x27;net.pkl&amp;#x27;)  直接加载整个网络模型（可能比较耗时）。 1model &#x3D; torch.load(&amp;#x27;net.pkl&amp;#x27;)  2.只保存加载模型参数只保存模型的权重参数（速度快，占内存少）。 1torch.save(model.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/16/srZNnJ.jpg">
+<meta property="article:published_time" content="2021-01-22T04:36:52.421Z">
+<meta property="article:modified_time" content="2021-01-22T12:04:20.215Z">
+<meta property="article:author" content="ApolloDPP">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/01/16/srZNnJ.jpg">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>Pytorch model_save&amp;load · ApolloDPP&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ApolloDPP&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Pytorch model_save&load</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>ApolloDPP's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Pytorch model_save&load
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Tools">Tools</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.8k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/01/22</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <hr>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/srZNnJ"><img src="https://s3.ax1x.com/2021/01/16/srZNnJ.jpg" alt="srZNnJ.jpg"></a></p>
+<hr>
+<h2 id="一、保存加载模型基本用法"><a href="#一、保存加载模型基本用法" class="headerlink" title="一、保存加载模型基本用法"></a>一、保存加载模型基本用法</h2><h3 id="1-保存加载整个模型"><a href="#1-保存加载整个模型" class="headerlink" title="1.保存加载整个模型"></a>1.保存加载整个模型</h3><p>保存整个网络模型（网络结构+权重参数）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(model, <span class="string">&#x27;net.pkl&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>直接加载整个网络模型（可能比较耗时）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = torch.load(<span class="string">&#x27;net.pkl&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-只保存加载模型参数"><a href="#2-只保存加载模型参数" class="headerlink" title="2.只保存加载模型参数"></a>2.<strong>只保存加载模型参数</strong></h3><p>只保存模型的权重参数（速度快，占内存少）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(model.state_dict(), <span class="string">&#x27;net_params.pkl&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>因为我们只保存了模型的参数，所以需要先定义一个网络对象，然后再加载模型参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建一个网络结构</span></span><br><span class="line">model = ClassNet()</span><br><span class="line"><span class="comment"># 将模型参数加载到新模型中</span></span><br><span class="line">state_dict = torch.load(<span class="string">&#x27;net_params.pkl&#x27;</span>)</span><br><span class="line">model.load_state_dict(state_dict)</span><br></pre></td></tr></table></figure>
+
+<p>保存模型进行推理测试时，只需保存训练好的模型的权重参数，即推荐第二种方法</p>
+<h2 id="二、保存加载自定义模型"><a href="#二、保存加载自定义模型" class="headerlink" title="二、保存加载自定义模型"></a>二、<strong>保存加载自定义模型</strong></h2><p>上面保存加载的 <code>net.pkl</code> 其实一个字典，通常包含如下内容：</p>
+<ol>
+<li><strong>网络结构</strong>：输入尺寸、输出尺寸以及隐藏层信息，以便能够在加载时重建模型。</li>
+<li><strong>模型的权重参数</strong>：包含各网络层训练后的可学习参数，可以在模型实例上调用 <code>state_dict()</code> 方法来获取，比如前面介绍只保存模型权重参数时用到的 <code>model.state_dict()</code>。</li>
+<li><strong>优化器参数</strong>：有时保存模型的参数需要稍后接着训练，那么就必须保存优化器的状态和所其使用的超参数，也是在优化器实例上调用 <code>state_dict()</code> 方法来获取这些参数。</li>
+<li>其他信息：有时我们需要保存一些其他的信息，比如 <code>epoch</code>，<code>batch_size</code> 等超参数。</li>
+</ol>
+<p>知道了这些，那么我们就可以自定义需要保存的内容，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># saving a checkpoint assuming the network class named ClassNet</span></span><br><span class="line">checkpoint = &#123;<span class="string">&#x27;model&#x27;</span>: ClassNet(),</span><br><span class="line">              <span class="string">&#x27;model_state_dict&#x27;</span>: model.state_dict(),</span><br><span class="line">              <span class="string">&#x27;optimizer_state_dict&#x27;</span>: optimizer.state_dict(),</span><br><span class="line">              <span class="string">&#x27;epoch&#x27;</span>: epoch&#125;</span><br><span class="line"></span><br><span class="line">torch.save(checkpoint, <span class="string">&#x27;checkpoint.pkl&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上面的 checkpoint 是个字典，里面有4个键值对，分别表示网络模型的不同信息。</p>
+<p>然后我们要加载上面保存的自定义的模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_checkpoint</span>(<span class="params">filepath</span>):</span></span><br><span class="line">    checkpoint = torch.load(filepath)</span><br><span class="line">    model = checkpoint[<span class="string">&#x27;model&#x27;</span>]  <span class="comment"># 提取网络结构</span></span><br><span class="line">    model.load_state_dict(checkpoint[<span class="string">&#x27;model_state_dict&#x27;</span>])  <span class="comment"># 加载网络权重参数</span></span><br><span class="line">    optimizer = TheOptimizerClass()</span><br><span class="line">    optimizer.load_state_dict(checkpoint[<span class="string">&#x27;optimizer_state_dict&#x27;</span>])  <span class="comment"># 加载优化器参数</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> parameter <span class="keyword">in</span> model.parameters():</span><br><span class="line">        parameter.requires_grad = <span class="literal">False</span></span><br><span class="line">    model.<span class="built_in">eval</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line">    </span><br><span class="line">model = load_checkpoint(<span class="string">&#x27;checkpoint.pkl&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果加载模型只是为了进行推理测试，则将每一层的 <code>requires_grad</code> 置为 <code>False</code>，即固定这些权重参数；还需要调用 <code>model.eval()</code> 将模型置为测试模式，主要是将 <code>dropout</code> 和 <code>batch normalization</code> 层进行固定，否则模型的预测结果每次都会不同。</p>
+<p>如果希望继续训练，则调用 <code>model.train()</code>，以确保网络模型处于训练模式。</p>
+<hr>
+<p><code>state_dict()</code> 也是一个Python字典对象，<code>model.state_dict()</code> 将每一层的可学习参数映射为参数矩阵，其中只包含具有可学习参数的层(卷积层、全连接层等)。</p>
+<p>比如下面这个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define model</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TheModelClass</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(TheModelClass, self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">8</span>, <span class="number">5</span>)</span><br><span class="line">        self.bn = nn.BatchNorm2d(<span class="number">8</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(<span class="number">8</span>, <span class="number">16</span>, <span class="number">5</span>)</span><br><span class="line">        self.pool = nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>, <span class="number">120</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">120</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        x = self.pool(F.relu(self.conv1(x)))</span><br><span class="line">        x = self.bn(x)</span><br><span class="line">        x = self.pool(F.relu(self.conv2(x)))</span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        x = self.fc3(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize model</span></span><br><span class="line">    model = TheModelClass()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize optimizer</span></span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.001</span>, momentum=<span class="number">0.9</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&quot;Model&#x27;s state_dict:&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> param_tensor <span class="keyword">in</span> model.state_dict():</span><br><span class="line">        print(param_tensor, <span class="string">&quot;\t&quot;</span>, model.state_dict()[param_tensor].size())</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&quot;Optimizer&#x27;s state_dict:&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> var_name <span class="keyword">in</span> optimizer.state_dict():</span><br><span class="line">        print(var_name, <span class="string">&quot;\t&quot;</span>, optimizer.state_dict()[var_name])</span><br></pre></td></tr></table></figure>
+
+<p>输出为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Model<span class="string">&#x27;s state_dict:</span></span><br><span class="line"><span class="string">conv1.weight            torch.Size([8, 3, 5, 5])</span></span><br><span class="line"><span class="string">conv1.bias              torch.Size([8])</span></span><br><span class="line"><span class="string">bn.weight               torch.Size([8])</span></span><br><span class="line"><span class="string">bn.bias                 torch.Size([8])</span></span><br><span class="line"><span class="string">bn.running_mean         torch.Size([8])</span></span><br><span class="line"><span class="string">bn.running_var          torch.Size([8])</span></span><br><span class="line"><span class="string">bn.num_batches_tracked  torch.Size([])</span></span><br><span class="line"><span class="string">conv2.weight            torch.Size([16, 8, 5, 5])</span></span><br><span class="line"><span class="string">conv2.bias              torch.Size([16])</span></span><br><span class="line"><span class="string">fc1.weight              torch.Size([120, 400])</span></span><br><span class="line"><span class="string">fc1.bias                torch.Size([120])</span></span><br><span class="line"><span class="string">fc2.weight              torch.Size([10, 120])</span></span><br><span class="line"><span class="string">fc2.bias                torch.Size([10])</span></span><br><span class="line"><span class="string">Optimizer&#x27;</span>s state_dict:</span><br><span class="line">state            &#123;&#125;</span><br><span class="line">param_groups     [&#123;<span class="string">&#x27;lr&#x27;</span>: <span class="number">0.001</span>, <span class="string">&#x27;momentum&#x27;</span>: <span class="number">0.9</span>, <span class="string">&#x27;dampening&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;weight_decay&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;nesterov&#x27;</span>: <span class="literal">False</span>, <span class="string">&#x27;params&#x27;</span>: [<span class="number">139805696932024</span>, <span class="number">139805483616008</span>, <span class="number">139805483616080</span>, <span class="number">139805483616152</span>, <span class="number">139805483616440</span>, <span class="number">139805483616512</span>, <span class="number">139805483616584</span>, <span class="number">139805483616656</span>, <span class="number">139805483616728</span>, <span class="number">139805483616800</span>]&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>可以看到 <code>model.state_dict()</code> 保存了卷积层，BatchNorm层和最大池化层的信息；而 <code>optimizer.state_dict()</code> 则保存的优化器的状态和相关的超参数。</p>
+<h2 id="三、跨设备保存加载模型"><a href="#三、跨设备保存加载模型" class="headerlink" title="三、跨设备保存加载模型"></a>三、跨设备保存加载模型</h2><h3 id="1-在-CPU-上加载在-GPU-上训练并保存的模型"><a href="#1-在-CPU-上加载在-GPU-上训练并保存的模型" class="headerlink" title="1.在 CPU 上加载在 GPU 上训练并保存的模型"></a>1.在 CPU 上加载在 GPU 上训练并保存的模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">model = TheModelClass()</span><br><span class="line"><span class="comment"># Load all tensors onto the CPU device</span></span><br><span class="line">model.load_state_dict(torch.load(<span class="string">&#x27;net_params.pkl&#x27;</span>, map_location=device))</span><br></pre></td></tr></table></figure>
+
+<p><code>map_location</code>：a function, torch.device, string or a dict specifying how to remap storage locations</p>
+<p>令 <code>torch.load()</code> 函数的 <code>map_location</code> 参数等于 <code>torch.device(&#39;cpu&#39;)</code> 即可。 这里令 <code>map_location</code> 参数等于 <code>&#39;cpu&#39;</code> 也同样可以。</p>
+<h3 id="2-在-GPU-上加载在-GPU-上训练并保存的模型"><a href="#2-在-GPU-上加载在-GPU-上训练并保存的模型" class="headerlink" title="2.在 GPU 上加载在 GPU 上训练并保存的模型"></a>2.在 GPU 上加载在 GPU 上训练并保存的模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">&quot;cuda&quot;</span>)</span><br><span class="line">model = TheModelClass()</span><br><span class="line">model.load_state_dict(torch.load(<span class="string">&#x27;net_params.pkl&#x27;</span>))</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure>
+
+<p>在这里使用 <code>map_location</code> 参数不起作用，要使用 <code>model.to(torch.device(&quot;cuda&quot;))</code> 将模型转换为CUDA优化的模型。</p>
+<p>还需要对将要输入模型的数据调用 <code>data = data.to(device)</code>，即将数据从CPU转移到GPU。请注意，调用 <code>my_tensor.to(device)</code> 会返回一个 <code>my_tensor</code> 在 GPU 上的副本，它不会覆盖 <code>my_tensor</code>。因此需要手动覆盖张量：<code>my_tensor = my_tensor.to(device)</code>。</p>
+<h3 id="3、在-GPU-上加载在-CPU-上训练并保存的模型"><a href="#3、在-GPU-上加载在-CPU-上训练并保存的模型" class="headerlink" title="3、在 GPU 上加载在 CPU 上训练并保存的模型"></a>3、在 GPU 上加载在 CPU 上训练并保存的模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">&quot;cuda&quot;</span>)</span><br><span class="line">model = TheModelClass()</span><br><span class="line">model.load_state_dict(torch.load(<span class="string">&#x27;net_params.pkl&#x27;</span>, map_location=<span class="string">&quot;cuda:0&quot;</span>))</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure>
+
+<p>当加载包含GPU tensors的模型时，这些tensors 会被默认加载到GPU上，不过是同一个GPU设备。</p>
+<p>当有多个GPU设备时，可以通过将 <code>map_location</code> 设定为 <code>*cuda:device_id*</code> 来指定使用哪一个GPU设备，上面例子是指定编号为0的GPU设备。</p>
+<p>其实也可以将 <code>torch.device(&quot;cuda&quot;)</code> 改为 <code>torch.device(&quot;cuda:0&quot;)</code> 来指定编号为0的GPU设备。</p>
+<p>最后调用 <code>model.to(torch.device(&#39;cuda&#39;))</code> 来将模型的tensors转换为 CUDA tensors。</p>
+<p>下面是PyTorch官方文档上的用法，可以进行参考：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.load(<span class="string">&#x27;tensors.pt&#x27;</span>)</span><br><span class="line"><span class="comment"># Load all tensors onto the CPU</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.load(<span class="string">&#x27;tensors.pt&#x27;</span>, map_location=torch.device(<span class="string">&#x27;cpu&#x27;</span>))</span><br><span class="line"><span class="comment"># Load all tensors onto the CPU, using a function</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.load(<span class="string">&#x27;tensors.pt&#x27;</span>, map_location=<span class="keyword">lambda</span> storage, loc: storage)</span><br><span class="line"><span class="comment"># Load all tensors onto GPU 1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.load(<span class="string">&#x27;tensors.pt&#x27;</span>, map_location=<span class="keyword">lambda</span> storage, loc: storage.cuda(<span class="number">1</span>))</span><br><span class="line"><span class="comment"># Map tensors from GPU 1 to GPU 0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.load(<span class="string">&#x27;tensors.pt&#x27;</span>, map_location=&#123;<span class="string">&#x27;cuda:1&#x27;</span>:<span class="string">&#x27;cuda:0&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、CUDA-的用法"><a href="#四、CUDA-的用法" class="headerlink" title="四、CUDA 的用法"></a>四、CUDA 的用法</h2><p>在PyTorch中和GPU相关的几个函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断cuda是否可用；</span></span><br><span class="line">print(torch.cuda.is_available())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取gpu数量；</span></span><br><span class="line">print(torch.cuda.device_count())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取gpu名字；</span></span><br><span class="line">print(torch.cuda.get_device_name(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回当前gpu设备索引，默认从0开始；</span></span><br><span class="line">print(torch.cuda.current_device())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tensor或者model在哪块GPU上</span></span><br><span class="line">print(torch.tensor([<span class="number">0</span>]).get_device())</span><br></pre></td></tr></table></figure>
+
+<p>我的电脑输出为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">GeForce RTX <span class="number">2080</span> Ti</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>有时我们需要把数据和模型从cpu移到gpu中，有以下两种方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">use_cuda = torch.cuda.is_available()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法一：</span></span><br><span class="line"><span class="keyword">if</span> use_cuda:</span><br><span class="line">    data = data.cuda()</span><br><span class="line">    model.cuda()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：</span></span><br><span class="line">device = torch.device(<span class="string">&quot;cuda&quot;</span> <span class="keyword">if</span> use_cuda <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span>)</span><br><span class="line">data = data.to(device)</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>个人比较习惯第二种方法，可以少一个 if 语句。而且该方法还可以通过设备号指定使用哪个GPU设备，比如使用0号设备：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">&quot;cuda:0&quot;</span> <span class="keyword">if</span> use_cuda <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/73893187">https://zhuanlan.zhihu.com/p/73893187</a></p>
+</blockquote>
+
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/01/22/Pytorch%20Tricks/" title= "Pytorch Tricks">
+                    <div class="prevTitle">Pytorch Tricks</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= https://livere.com/>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:2661983783@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ApolloDPP" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BF%9D%E5%AD%98%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">一、保存加载模型基本用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BF%9D%E5%AD%98%E5%8A%A0%E8%BD%BD%E6%95%B4%E4%B8%AA%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1.保存加载整个模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%AA%E4%BF%9D%E5%AD%98%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">2.只保存加载模型参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BF%9D%E5%AD%98%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">二、保存加载自定义模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%B7%A8%E8%AE%BE%E5%A4%87%E4%BF%9D%E5%AD%98%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">三、跨设备保存加载模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9C%A8-CPU-%E4%B8%8A%E5%8A%A0%E8%BD%BD%E5%9C%A8-GPU-%E4%B8%8A%E8%AE%AD%E7%BB%83%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text">1.在 CPU 上加载在 GPU 上训练并保存的模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8-GPU-%E4%B8%8A%E5%8A%A0%E8%BD%BD%E5%9C%A8-GPU-%E4%B8%8A%E8%AE%AD%E7%BB%83%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text">2.在 GPU 上加载在 GPU 上训练并保存的模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%9C%A8-GPU-%E4%B8%8A%E5%8A%A0%E8%BD%BD%E5%9C%A8-CPU-%E4%B8%8A%E8%AE%AD%E7%BB%83%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.3.</span> <span class="toc-text">3、在 GPU 上加载在 CPU 上训练并保存的模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81CUDA-%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">四、CUDA 的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        </div>
+        <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/22</span><a class="archive-post-title" href= "/2021/01/22/Pytorch%20model_save_load/" >Pytorch model_save&load</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/22</span><a class="archive-post-title" href= "/2021/01/22/Pytorch%20Tricks/" >Pytorch Tricks</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2020/12/22/Speech%20Recognition/" >Speech Recognition CNN+CTC</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2020/12/12/DL-FCN/" >DL-FCN</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2020/12/12/DL-Convolutions/" >DL-Convolutions</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2020/12/04/HMM/" >HMM</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/01</span><a class="archive-post-title" href= "/2020/12/01/Bilinear_interpolation/" >Bilinear_interpolation三种算法实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/29</span><a class="archive-post-title" href= "/2020/11/29/Dataformat_JSON_XML_CSV/" >Dataformat @JSON&XML&CSV</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2020/11/10/Datasets-MedMNIST/" >Datasets @MedMNIST</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/03</span><a class="archive-post-title" href= "/2020/11/03/DL-Tools%20Visdom/" >DL-Tools @Visdom</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/30</span><a class="archive-post-title" href= "/2020/10/30/Sharing-WHAT%20YOU%20WANT!/" >Sharing @WHAT YOU WANT!</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2020/10/28/Sharing-Matplotlib/" >Sharing @Matplotlib</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2020/10/28/Sharing-AI-interview300/" >Sharing @AI-interview-300</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/2020/10/25/Darknet2_Resnet/" >DL classifier @基于Dark net中Resnet34的图像分类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/Darknet1_install/" >DL-Tools @Darknet 框架介绍 与 安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2020/10/24/first_blog/" >Hi  salt-fish ApolloDPP!</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="DL"><span class="iconfont-archer">&#xe606;</span>DL</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tools"><span class="iconfont-archer">&#xe606;</span>Tools</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Darknet"><span class="iconfont-archer">&#xe60a;</span>Darknet</span>
+    
+        <span class="sidebar-category-name" data-categories="Pytorch"><span class="iconfont-archer">&#xe60a;</span>Pytorch</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "ApolloDPP"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
